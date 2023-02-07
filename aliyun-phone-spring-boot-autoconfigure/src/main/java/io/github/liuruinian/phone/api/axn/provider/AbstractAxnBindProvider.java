@@ -7,28 +7,60 @@ import com.aliyuncs.dyplsapi.model.v20170525.BindAxnRequest;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnResponse;
 import io.github.liuruinian.phone.api.axn.domain.AxnBindExtensionRequest;
 import io.github.liuruinian.phone.api.axn.domain.AxnBindRequest;
+import io.github.liuruinian.phone.api.axn.processor.BindAxnPostProcessor;
 import io.github.liuruinian.phone.exception.BindAxnException;
+import io.github.liuruinian.phone.threadpool.AsyncThreadPoolExecutor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * @author liuruinian
  * @since 2023-02-07
  */
-public abstract class AbstractAxnBindProvider implements AxnBindProvider {
+@Slf4j
+public abstract class AbstractAxnBindProvider implements AxnBindProvider, ApplicationContextAware {
 
     private final IAcsClient acsClient;
 
-    public AbstractAxnBindProvider(IAcsClient acsClient) {
+    private final AsyncThreadPoolExecutor asyncThreadPoolExecutor;
+
+    private ApplicationContext applicationContext;
+
+    public AbstractAxnBindProvider(IAcsClient acsClient, AsyncThreadPoolExecutor asyncThreadPoolExecutor) {
         this.acsClient = acsClient;
+        this.asyncThreadPoolExecutor = asyncThreadPoolExecutor;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 
     @Override
     public BindAxnResponse bindAxn(AxnBindRequest request) throws BindAxnException {
 
+        BindAxnPostProcessor bindAxnPostProcessor = null;
+        try {
+            bindAxnPostProcessor = applicationContext.getBean(BindAxnPostProcessor.class);
+        } catch (BeansException e) {
+            if (log.isDebugEnabled()) {
+                log.debug("No bean founded: BindAxnPostProcessor");
+            }
+        }
+
         try {
             BindAxnRequest axnRequest = buildBindAxnRequest(request);
+            if (bindAxnPostProcessor != null) {
+                bindAxnPostProcessor.postProcessBeforeBind(axnRequest);
+            }
 
             BindAxnResponse response = acsClient.getAcsResponse(axnRequest);
             if (response.getCode() != null && "OK".equals(response.getCode())) {
+                if (bindAxnPostProcessor != null) {
+                    bindAxnPostProcessor.postProcessAfterBind(response);
+                }
                 return response;
             }
         } catch (Exception e) {

@@ -39,7 +39,7 @@ public class AliPhoneConfiguration {
     }
 
     @Bean
-    public AxnBindDelegate axnBindDelegate(IAcsClient acsClient) {
-        return new AxnBindDelegate(acsClient);
+    public AxnBindDelegate axnBindDelegate(IAcsClient acsClient, AsyncThreadPoolExecutor asyncThreadPoolExecutor) {
+        return new AxnBindDelegate(acsClient, asyncThreadPoolExecutor);
     }
 }
