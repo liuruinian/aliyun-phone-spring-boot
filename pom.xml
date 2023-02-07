@@ -81,7 +81,39 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-boot.version>2.7.7</spring-boot.version>
+        <aliyun-java-sdk-core>4.6.3</aliyun-java-sdk-core>
+        <aliyun-java-sdk-dyplsapi>1.3.2</aliyun-java-sdk-dyplsapi>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun-java-sdk-core}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dyplsapi</artifactId>
+                <version>${aliyun-java-sdk-dyplsapi}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.liuruinian</groupId>
+                <artifactId>aliyun-phone-spring-boot-autoconfigure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <distributionManagement>
         <!-- 这里的id ossrh需要和setting.xml里面server节点配置的id一致-->
