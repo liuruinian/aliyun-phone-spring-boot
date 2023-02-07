@@ -4,8 +4,10 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import io.github.liuruinian.phone.axn.delegate.AxnBindDelegate;
+import io.github.liuruinian.phone.api.axn.delegate.AxnBindDelegate;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
+import io.github.liuruinian.phone.threadpool.AsyncThreadPoolExecutor;
+import io.github.liuruinian.phone.threadpool.DefaultAsyncThreadPoolExecutor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +31,11 @@ public class AliPhoneConfiguration {
         DefaultProfile.addEndpoint(endPoint, AliPhoneProperties.PRODUCT, AliPhoneProperties.DOMAIN);
 
         return new DefaultAcsClient(profile);
+    }
+
+    @Bean
+    public AsyncThreadPoolExecutor asyncThreadPoolExecutor(AliPhoneProperties properties) {
+        return new DefaultAsyncThreadPoolExecutor(properties);
     }
 
     @Bean

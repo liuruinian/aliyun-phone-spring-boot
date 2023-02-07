@@ -1,11 +1,11 @@
-package io.github.liuruinian.phone.axn.delegate;
+package io.github.liuruinian.phone.api.axn.delegate;
 
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnExtensionRequest;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnRequest;
-import io.github.liuruinian.phone.axn.domain.AxnBindExtensionRequest;
-import io.github.liuruinian.phone.axn.domain.AxnBindRequest;
-import io.github.liuruinian.phone.axn.provider.AbstractAxnBindProvider;
+import io.github.liuruinian.phone.api.axn.domain.AxnBindExtensionRequest;
+import io.github.liuruinian.phone.api.axn.domain.AxnBindRequest;
+import io.github.liuruinian.phone.api.axn.provider.AbstractAxnBindProvider;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.util.StringUtils;
 

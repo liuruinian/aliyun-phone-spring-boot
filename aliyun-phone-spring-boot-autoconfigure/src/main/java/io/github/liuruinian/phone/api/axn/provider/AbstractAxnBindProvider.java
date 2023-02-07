@@ -1,12 +1,12 @@
-package io.github.liuruinian.phone.axn.provider;
+package io.github.liuruinian.phone.api.axn.provider;
 
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnExtensionRequest;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnExtensionResponse;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnRequest;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnResponse;
-import io.github.liuruinian.phone.axn.domain.AxnBindExtensionRequest;
-import io.github.liuruinian.phone.axn.domain.AxnBindRequest;
+import io.github.liuruinian.phone.api.axn.domain.AxnBindExtensionRequest;
+import io.github.liuruinian.phone.api.axn.domain.AxnBindRequest;
 import io.github.liuruinian.phone.exception.BindAxnException;
 
 /**
