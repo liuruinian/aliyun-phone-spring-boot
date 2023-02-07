@@ -1,4 +1,4 @@
-package io.github.liuruinian.phone.api.axn.domain;
+package io.github.liuruinian.phone.domain.axn;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -21,6 +21,7 @@ public class AxnBindRequest implements Serializable {
      * 号码池Key
      * eg: FC2256****
      */
+    @JsonProperty(value = "PoolKey")
     private String poolKey;
 
     /**

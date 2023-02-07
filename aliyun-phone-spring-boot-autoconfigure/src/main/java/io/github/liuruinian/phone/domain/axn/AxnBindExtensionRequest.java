@@ -1,4 +1,4 @@
-package io.github.liuruinian.phone.api.axn.domain;
+package io.github.liuruinian.phone.domain.axn;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
