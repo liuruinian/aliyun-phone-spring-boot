@@ -6,6 +6,10 @@
     <artifactId>aliyun-phone-spring-boot</artifactId>
 
     <version>1.0.0</version>
+    <modules>
+        <module>aliyun-phone-spring-boot-autoconfigure</module>
+        <module>aliyun-phone-spring-boot-starter</module>
+    </modules>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
     <name>aliyun-phone-spring-boot</name>
