@@ -4,6 +4,7 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import io.github.liuruinian.phone.axn.delegate.AxnBindDelegate;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -28,5 +29,10 @@ public class AliPhoneConfiguration {
         DefaultProfile.addEndpoint(endPoint, AliPhoneProperties.PRODUCT, AliPhoneProperties.DOMAIN);
 
         return new DefaultAcsClient(profile);
+    }
+
+    @Bean
+    public AxnBindDelegate axnBindDelegate(IAcsClient acsClient) {
+        return new AxnBindDelegate(acsClient);
     }
 }
