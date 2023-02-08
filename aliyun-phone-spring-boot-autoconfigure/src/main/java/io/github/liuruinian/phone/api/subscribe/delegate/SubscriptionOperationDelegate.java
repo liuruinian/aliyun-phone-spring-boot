@@ -1,8 +1,10 @@
 package io.github.liuruinian.phone.api.subscribe.delegate;
 
 import com.aliyuncs.IAcsClient;
+import com.aliyuncs.dyplsapi.model.v20170525.UnbindSubscriptionRequest;
 import com.aliyuncs.dyplsapi.model.v20170525.UpdateSubscriptionRequest;
 import io.github.liuruinian.phone.api.subscribe.provider.AbstractSubscriptionProvider;
+import io.github.liuruinian.phone.domain.subscribe.SubscriptionUnbindRequest;
 import io.github.liuruinian.phone.domain.subscribe.SubscriptionUpdateRequest;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.util.StringUtils;
@@ -73,6 +75,29 @@ public class SubscriptionOperationDelegate extends AbstractSubscriptionProvider 
         // ASRModelId
         propertyMapper.from(request::getAsrModelId)
                 .to(usr::setASRModelId);
+
+        return usr;
+    }
+
+    @Override
+    protected UnbindSubscriptionRequest buildUnbindSubscriptionRequest(SubscriptionUnbindRequest request) {
+        PropertyMapper propertyMapper = PropertyMapper.get().alwaysApplyingWhenNonNull();
+        UnbindSubscriptionRequest usr = new UnbindSubscriptionRequest();
+
+        // PoolKey
+        propertyMapper.from(request::getPoolKey)
+                .to(usr::setPoolKey);
+        // ProductType
+        propertyMapper.from(request::getProductType)
+                .to(usr::setProductType);
+        // SubsId
+        propertyMapper.from(request::getSubsId)
+                .whenNot(s -> !StringUtils.hasLength(s))
+                .to(usr::setSubsId);
+        // SecretNo
+        propertyMapper.from(request::getSecretNo)
+                .whenNot(secret -> !StringUtils.hasLength(secret))
+                .to(usr::setSecretNo);
 
         return usr;
     }
