@@ -6,7 +6,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import io.github.liuruinian.phone.api.axn.delegate.AxnBindDelegate;
 import io.github.liuruinian.phone.api.state.delegate.StateQueryDelegate;
-import io.github.liuruinian.phone.api.state.provider.StateQueryProvider;
+import io.github.liuruinian.phone.api.subscribe.delegate.SubscriptionOperationDelegate;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import io.github.liuruinian.phone.threadpool.AsyncThreadPoolExecutor;
 import io.github.liuruinian.phone.threadpool.DefaultAsyncThreadPoolExecutor;
@@ -48,5 +48,10 @@ public class AliPhoneConfiguration {
     @Bean
     public StateQueryDelegate stateQueryDelegate(IAcsClient acsClient) {
         return new StateQueryDelegate(acsClient);
+    }
+
+    @Bean
+    public SubscriptionOperationDelegate subscriptionOperationDelegate(IAcsClient acsClient) {
+        return new SubscriptionOperationDelegate(acsClient);
     }
 }
