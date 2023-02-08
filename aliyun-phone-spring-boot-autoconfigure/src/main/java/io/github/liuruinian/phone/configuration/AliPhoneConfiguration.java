@@ -4,6 +4,7 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import io.github.liuruinian.phone.api.axb.delegate.AxbBindDelegate;
 import io.github.liuruinian.phone.api.axn.delegate.AxnBindDelegate;
 import io.github.liuruinian.phone.api.state.delegate.StateQueryDelegate;
 import io.github.liuruinian.phone.api.subscribe.delegate.SubscriptionOperationDelegate;
@@ -43,6 +44,11 @@ public class AliPhoneConfiguration {
     @Bean
     public AxnBindDelegate axnBindDelegate(IAcsClient acsClient, AsyncThreadPoolExecutor asyncThreadPoolExecutor) {
         return new AxnBindDelegate(acsClient, asyncThreadPoolExecutor);
+    }
+
+    @Bean
+    public AxbBindDelegate axbBindDelegate(IAcsClient acsClient) {
+        return new AxbBindDelegate(acsClient);
     }
 
     @Bean
