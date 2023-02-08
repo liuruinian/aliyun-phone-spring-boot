@@ -50,8 +50,7 @@
     {
       "name": "phone.protection.ali.thread-pool.core-pool-size",
       "type": "java.lang.Integer",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
-      "defaultValue": 0
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
     },
     {
       "name": "phone.protection.ali.thread-pool.keep-alive-time",
@@ -62,8 +61,7 @@
     {
       "name": "phone.protection.ali.thread-pool.maximum-pool-size",
       "type": "java.lang.Integer",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
-      "defaultValue": 0
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
     },
     {
       "name": "phone.protection.ali.thread-pool.queue-capacity",
