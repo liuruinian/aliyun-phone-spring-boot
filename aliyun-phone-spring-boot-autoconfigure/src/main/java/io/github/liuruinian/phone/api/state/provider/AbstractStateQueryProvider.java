@@ -6,6 +6,10 @@ import com.aliyuncs.dyplsapi.model.v20170525.QuerySubscriptionDetailResponse;
 import io.github.liuruinian.phone.domain.state.SubscriptionDetailRequest;
 import io.github.liuruinian.phone.exception.StateQueryException;
 
+/**
+ * @author liuruinian
+ * @since 2023-02-07
+ */
 public abstract class AbstractStateQueryProvider implements StateQueryProvider {
 
     private final IAcsClient acsClient;
