@@ -1,0 +1,85 @@
+{
+  "groups": [
+    {
+      "name": "phone.protection.ali",
+      "type": "io.github.liuruinian.phone.properties.AliPhoneProperties",
+      "description": "阿里云号码隐私保护服务配置.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties"
+    },
+    {
+      "name": "phone.protection.ali.acs",
+      "type": "io.github.liuruinian.phone.properties.AliPhoneProperties$Acs",
+      "description": "阿里云号码隐私保护IAcsClient配置.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties",
+      "sourceMethod": "getAcs()"
+    },
+    {
+      "name": "phone.protection.ali.thread-pool",
+      "type": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
+      "description": "阿里云号码隐私保护线程池配置.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties",
+      "sourceMethod": "getThreadPool()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "phone.protection.ali.acs.access-key-id",
+      "type": "java.lang.String",
+      "description": "accessKeyId.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Acs"
+    },
+    {
+      "name": "phone.protection.ali.acs.access-key-secret",
+      "type": "java.lang.String",
+      "description": "accessKeySecret.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Acs"
+    },
+    {
+      "name": "phone.protection.ali.acs.endpoint",
+      "type": "java.lang.String",
+      "description": "Endpoint.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Acs",
+      "defaultValue": "cn-hangzhou"
+    },
+    {
+      "name": "phone.protection.ali.pool-key",
+      "type": "java.lang.String",
+      "description": "poolKey.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties"
+    },
+    {
+      "name": "phone.protection.ali.thread-pool.core-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
+      "defaultValue": 0
+    },
+    {
+      "name": "phone.protection.ali.thread-pool.keep-alive-time",
+      "type": "java.lang.Long",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
+      "defaultValue": 60
+    },
+    {
+      "name": "phone.protection.ali.thread-pool.maximum-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
+      "defaultValue": 0
+    },
+    {
+      "name": "phone.protection.ali.thread-pool.queue-capacity",
+      "type": "java.lang.Integer",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
+    },
+    {
+      "name": "phone.protection.ali.thread-pool.reject-policy",
+      "type": "io.github.liuruinian.phone.properties.RejectPolicy",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
+    },
+    {
+      "name": "phone.protection.ali.thread-pool.unit",
+      "type": "java.util.concurrent.TimeUnit",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
+    }
+  ],
+  "hints": []
+}
