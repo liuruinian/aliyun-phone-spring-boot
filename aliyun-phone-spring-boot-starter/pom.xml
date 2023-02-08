@@ -11,5 +11,11 @@
 
     <artifactId>aliyun-phone-spring-boot-starter</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.github.liuruinian</groupId>
+            <artifactId>aliyun-phone-spring-boot-autoconfigure</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
