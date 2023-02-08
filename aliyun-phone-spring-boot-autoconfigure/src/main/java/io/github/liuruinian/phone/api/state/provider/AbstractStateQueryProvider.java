@@ -2,7 +2,6 @@ package io.github.liuruinian.phone.api.state.provider;
 
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dyplsapi.model.v20170525.*;
-import com.aliyuncs.exceptions.ClientException;
 import io.github.liuruinian.phone.domain.state.SecretNoDetailRequest;
 import io.github.liuruinian.phone.domain.state.SubsIdRequest;
 import io.github.liuruinian.phone.domain.state.SubscriptionDetailRequest;
