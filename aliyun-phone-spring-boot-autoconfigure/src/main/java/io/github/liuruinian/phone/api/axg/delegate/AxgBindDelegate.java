@@ -2,8 +2,10 @@ package io.github.liuruinian.phone.api.axg.delegate;
 
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxgRequest;
+import com.aliyuncs.dyplsapi.model.v20170525.CreateAxgGroupRequest;
 import io.github.liuruinian.phone.api.axg.provider.AbstractAxgBindProvider;
 import io.github.liuruinian.phone.domain.axg.AxgBindRequest;
+import io.github.liuruinian.phone.domain.axg.AxgCreateGroupRequest;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.util.StringUtils;
 
@@ -73,5 +75,27 @@ public class AxgBindDelegate extends AbstractAxgBindProvider {
                 .to(axgRequest::setCallRestrict);
 
         return axgRequest;
+    }
+
+    @Override
+    protected CreateAxgGroupRequest buildAxgCreateGroupRequest(AxgCreateGroupRequest request) {
+        PropertyMapper propertyMapper = PropertyMapper.get().alwaysApplyingWhenNonNull();
+        CreateAxgGroupRequest gr = new CreateAxgGroupRequest();
+
+        // PoolKey
+        propertyMapper.from(request::getPoolKey)
+                .whenNot(p -> !StringUtils.hasLength(p))
+                .to(gr::setPoolKey);
+        // Name
+        propertyMapper.from(request::getName)
+                .to(gr::setName);
+        // Remark
+        propertyMapper.from(request::getRemark)
+                .to(gr::setRemark);
+        // Numbers
+        propertyMapper.from(request::getNumbers)
+                .to(gr::setNumbers);
+
+        return gr;
     }
 }
