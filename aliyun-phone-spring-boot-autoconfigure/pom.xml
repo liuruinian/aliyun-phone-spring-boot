@@ -79,19 +79,15 @@
             <version>1.1.9.2</version>
         </dependency>
         <dependency>
-            <groupId>com.aliyun.alicom</groupId>
+            <groupId>com.alicom.mns</groupId>
             <artifactId>alicom-mns-receive-sdk</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/alicom-mns-receive-sdk-1.0.0.jar</systemPath>
+            <version>1.1.3</version>
         </dependency>
 
         <dependency>
-            <groupId>com.aliyun</groupId>
+            <groupId>com.aliyuncs.dybaseapi</groupId>
             <artifactId>aliyun-java-sdk-dybaseapi</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/aliyun-java-sdk-dybaseapi-1.0.0.jar</systemPath>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 </project>
