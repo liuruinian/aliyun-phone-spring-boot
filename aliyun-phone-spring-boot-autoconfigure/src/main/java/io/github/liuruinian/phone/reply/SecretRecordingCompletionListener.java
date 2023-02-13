@@ -1,4 +1,4 @@
-package io.github.liuruinian.phone.listener;
+package io.github.liuruinian.phone.reply;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alicom.mns.tools.MessageListener;
@@ -9,10 +9,10 @@ import lombok.extern.slf4j.Slf4j;
  * @author liuruinian
  * @since 2023-02-13
  *
- * listen for the secret end report after the call ends.
+ * The recording completes the event message listening.
  */
 @Slf4j
-public class SecretEndReportListener implements MessageListener {
+public class SecretRecordingCompletionListener implements MessageListener {
 
     @Override
     public boolean dealMessage(Message message) {
@@ -25,6 +25,7 @@ public class SecretEndReportListener implements MessageListener {
         // utf-8 message body
         String s = message.getMessageBodyAsString();
         JSONObject messageBody = JSONObject.parseObject(s);
+
 
         // ACK
         return true;
