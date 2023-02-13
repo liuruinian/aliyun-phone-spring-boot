@@ -36,16 +36,28 @@ public class AliPhoneProperties {
      */
     private String poolKey;
 
-    public Mns getMns() {
-        return mns;
-    }
-
     public Acs getAcs() {
         return acs;
     }
 
+    public void setAcs(Acs acs) {
+        this.acs = acs;
+    }
+
+    public Mns getMns() {
+        return mns;
+    }
+
+    public void setMns(Mns mns) {
+        this.mns = mns;
+    }
+
     public ThreadPool getThreadPool() {
         return threadPool;
+    }
+
+    public void setThreadPool(ThreadPool threadPool) {
+        this.threadPool = threadPool;
     }
 
     public String getPoolKey() {

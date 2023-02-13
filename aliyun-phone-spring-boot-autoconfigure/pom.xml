@@ -5,10 +5,11 @@
     <parent>
         <artifactId>aliyun-phone-spring-boot</artifactId>
         <groupId>io.github.liuruinian</groupId>
-        <version>1.0.6</version>
+        <version>1.0.7</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
     <artifactId>aliyun-phone-spring-boot-autoconfigure</artifactId>
 
     <properties>
