@@ -1,5 +1,6 @@
 package io.github.liuruinian.phone.configuration;
 
+import com.alicom.mns.tools.DefaultAlicomMessagePuller;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
@@ -13,9 +14,10 @@ import io.github.liuruinian.phone.api.subscribe.delegate.SubscriptionOperationDe
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import io.github.liuruinian.phone.threadpool.AsyncThreadPoolExecutor;
 import io.github.liuruinian.phone.threadpool.DefaultAsyncThreadPoolExecutor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
  * @author liuruinian
@@ -41,6 +43,30 @@ public class AliPhoneConfiguration {
     @Bean
     public AsyncThreadPoolExecutor asyncThreadPoolExecutor(AliPhoneProperties properties) {
         return new DefaultAsyncThreadPoolExecutor(properties);
+    }
+
+    /**
+     * ali message puller
+     */
+    @Bean
+    @Scope(ConfigurableListableBeanFactory.SCOPE_PROTOTYPE)
+    @Conditional(DefaultAlicomMessagePullerCondition.class)
+    public DefaultAlicomMessagePuller defaultAlicomMessagePuller() {
+        return new DefaultAlicomMessagePuller();
+    }
+
+    public static class DefaultAlicomMessagePullerCondition implements Condition {
+        @Override
+        public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+            ClassLoader classLoader = context.getClassLoader();
+            try {
+                assert classLoader != null;
+                classLoader.loadClass("com.alicom.mns.tools.DefaultAlicomMessagePuller");
+                return true;
+            } catch (ClassNotFoundException e) {
+                return false;
+            }
+        }
     }
 
     @Bean

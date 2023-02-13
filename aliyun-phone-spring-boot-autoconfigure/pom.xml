@@ -64,5 +64,20 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun.alicom</groupId>
+            <artifactId>alicom-mns-receive-sdk</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/alicom-mns-receive-sdk-1.0.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dybaseapi</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/aliyun-java-sdk-dybaseapi-1.0.0.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
