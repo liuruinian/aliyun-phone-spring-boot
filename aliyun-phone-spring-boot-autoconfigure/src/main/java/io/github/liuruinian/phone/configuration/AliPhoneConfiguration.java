@@ -1,5 +1,6 @@
 package io.github.liuruinian.phone.configuration;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alicom.mns.tools.DefaultAlicomMessagePuller;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -11,15 +12,23 @@ import io.github.liuruinian.phone.api.axn.delegate.AxnBindDelegate;
 import io.github.liuruinian.phone.api.record.delegate.PhoneRecordDelegate;
 import io.github.liuruinian.phone.api.state.delegate.StateQueryDelegate;
 import io.github.liuruinian.phone.api.subscribe.delegate.SubscriptionOperationDelegate;
+import io.github.liuruinian.phone.endpoint.PhoneProtectionEndpoint;
 import io.github.liuruinian.phone.initializer.ReplyMessageQueueInitializer;
 import io.github.liuruinian.phone.mnsreply.SecretEndReportListener;
 import io.github.liuruinian.phone.mnsreply.SecretRecordingCompletionListener;
 import io.github.liuruinian.phone.mnsreply.SecretStartReportListener;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 import org.springframework.core.type.AnnotatedTypeMetadata;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
+import java.lang.reflect.Method;
 
 /**
  * @author liuruinian
@@ -125,5 +134,34 @@ public class AliPhoneConfiguration {
     @Bean
     public PhoneRecordDelegate phoneRecordDelegate(IAcsClient acsClient) {
         return new PhoneRecordDelegate(acsClient);
+    }
+
+    // ~ ---------------------------------------- endpoint -------------------------------------------------------------
+    /**
+     * @param mapping
+     *         RequestMappingHandlerMapping
+     * @param endpoint
+     *         PhoneProtectionEndpoint
+     * @throws NoSuchMethodException
+     *         if a matching method is not found
+     *         or if the name is "&lt;init&gt;"or "&lt;clinit&gt;".
+     * @throws SecurityException
+     *         If a security manager, <i>s</i>, is present and
+     *         the caller's class loader is not the same as or an
+     *         ancestor of the class loader for the current class and
+     *         invocation of {@link SecurityManager#checkPackageAccess
+     *         s.checkPackageAccess()} denies access to the package
+     *         of this class.
+     */
+    @Autowired(required = false)
+    @ConditionalOnBean(RequestMappingHandlerMapping.class)
+    public void setSecretStartReportCallbackMapping(RequestMappingHandlerMapping mapping,
+                                       PhoneProtectionEndpoint endpoint) throws NoSuchMethodException, SecurityException {
+
+        Method ssrc = PhoneProtectionEndpoint.class.getMethod("secretStartRecordCallback", JSONArray.class);
+        RequestMappingInfo ssrcmp = RequestMappingInfo.paths("/secret_start_record/callback")
+                .methods(RequestMethod.POST).build();
+
+        mapping.registerMapping(ssrcmp, endpoint, ssrc);
     }
 }

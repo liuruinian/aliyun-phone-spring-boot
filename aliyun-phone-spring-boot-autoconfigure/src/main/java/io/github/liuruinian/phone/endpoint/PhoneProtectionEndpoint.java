@@ -3,7 +3,6 @@ package io.github.liuruinian.phone.endpoint;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class PhoneProtectionEndpoint {
 
-    @PostMapping(path = "/secret_start_record/callback")
     public String secretStartRecordCallback(@RequestBody JSONArray messageBody) {
         log.info("receive a http secret start record: \n{}", JSONObject.toJSONString(messageBody, true));
         return "{ \"code\": 0, \"msg\": \"成功\" }";
