@@ -159,7 +159,7 @@ public class AliPhoneConfiguration {
                                        PhoneProtectionEndpoint endpoint) throws NoSuchMethodException, SecurityException {
 
         Method ssrc = PhoneProtectionEndpoint.class.getMethod("secretStartRecordCallback", JSONArray.class);
-        RequestMappingInfo ssrcmp = RequestMappingInfo.paths("/secret_start_record/callback")
+        RequestMappingInfo ssrcmp = RequestMappingInfo.paths("/secret/start/record/callback")
                 .methods(RequestMethod.POST).build();
 
         mapping.registerMapping(ssrcmp, endpoint, ssrc);
