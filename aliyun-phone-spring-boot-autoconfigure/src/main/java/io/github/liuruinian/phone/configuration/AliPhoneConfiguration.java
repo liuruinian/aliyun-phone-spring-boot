@@ -35,6 +35,7 @@ import java.lang.reflect.Method;
  * @since 2023-02-07
  */
 @Configuration
+@ComponentScan(basePackages = {"io.github.liuruinian.phone.endpoint"})
 @EnableConfigurationProperties(value = {AliPhoneProperties.class})
 public class AliPhoneConfiguration {
 
