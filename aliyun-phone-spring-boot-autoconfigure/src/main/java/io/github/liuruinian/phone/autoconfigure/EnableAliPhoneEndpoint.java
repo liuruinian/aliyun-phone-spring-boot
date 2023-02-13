@@ -1,6 +1,6 @@
 package io.github.liuruinian.phone.autoconfigure;
 
-import io.github.liuruinian.phone.endpoint.AliPhoneEndpoint;
+import io.github.liuruinian.phone.endpoint.PhoneProtectionEndpoint;
 import org.springframework.context.annotation.Import;
 import java.lang.annotation.*;
 
@@ -11,6 +11,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(AliPhoneEndpoint.class)
+@Import(PhoneProtectionEndpoint.class)
 public @interface EnableAliPhoneEndpoint {
 }

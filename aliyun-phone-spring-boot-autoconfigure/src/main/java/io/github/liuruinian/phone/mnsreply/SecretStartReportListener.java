@@ -1,4 +1,4 @@
-package io.github.liuruinian.phone.reply;
+package io.github.liuruinian.phone.mnsreply;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alicom.mns.tools.MessageListener;
