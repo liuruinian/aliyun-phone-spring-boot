@@ -152,10 +152,10 @@
                     <include>**/*.ftl</include>
                     <include>**/*.lua</include>
                     <include>**/*.json</include>
-                    <include>**/*.jar</include>
                     <include>processes/*</include>
                     <include>**/spring.factories</include>
                     <include>META-INF/services/*</include>
+                    <include>lib/*.jar</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
