@@ -6,14 +6,13 @@ import com.aliyuncs.dyplsapi.model.v20170525.BindAxnRequest;
 import io.github.liuruinian.phone.domain.axn.AxnBindExtensionRequest;
 import io.github.liuruinian.phone.domain.axn.AxnBindRequest;
 import io.github.liuruinian.phone.api.axn.provider.AbstractAxnBindProvider;
-import io.github.liuruinian.phone.threadpool.AsyncThreadPoolExecutor;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.util.StringUtils;
 
 public class AxnBindDelegate extends AbstractAxnBindProvider {
 
-    public AxnBindDelegate(IAcsClient acsClient, AsyncThreadPoolExecutor asyncThreadPoolExecutor) {
-        super(acsClient, asyncThreadPoolExecutor);
+    public AxnBindDelegate(IAcsClient acsClient) {
+        super(acsClient);
     }
 
     @Override

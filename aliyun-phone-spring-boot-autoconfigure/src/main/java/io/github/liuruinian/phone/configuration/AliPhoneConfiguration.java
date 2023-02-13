@@ -100,8 +100,8 @@ public class AliPhoneConfiguration {
     // ~ ---------------------------------------- api delegate bean ----------------------------------------------------
 
     @Bean
-    public AxnBindDelegate axnBindDelegate(IAcsClient acsClient, AsyncThreadPoolExecutor asyncThreadPoolExecutor) {
-        return new AxnBindDelegate(acsClient, asyncThreadPoolExecutor);
+    public AxnBindDelegate axnBindDelegate(IAcsClient acsClient) {
+        return new AxnBindDelegate(acsClient);
     }
 
     @Bean
