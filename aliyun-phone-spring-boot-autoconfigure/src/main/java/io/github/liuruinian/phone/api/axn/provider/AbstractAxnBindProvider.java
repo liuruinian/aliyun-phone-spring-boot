@@ -9,7 +9,6 @@ import io.github.liuruinian.phone.domain.axn.AxnBindExtensionRequest;
 import io.github.liuruinian.phone.domain.axn.AxnBindRequest;
 import io.github.liuruinian.phone.api.axn.processor.BindAxnPostProcessor;
 import io.github.liuruinian.phone.exception.BindAxnException;
-import io.github.liuruinian.phone.threadpool.AsyncThreadPoolExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -24,13 +23,10 @@ public abstract class AbstractAxnBindProvider implements AxnBindProvider, Applic
 
     private final IAcsClient acsClient;
 
-    private final AsyncThreadPoolExecutor asyncThreadPoolExecutor;
-
     private ApplicationContext applicationContext;
 
-    public AbstractAxnBindProvider(IAcsClient acsClient, AsyncThreadPoolExecutor asyncThreadPoolExecutor) {
+    public AbstractAxnBindProvider(IAcsClient acsClient) {
         this.acsClient = acsClient;
-        this.asyncThreadPoolExecutor = asyncThreadPoolExecutor;
     }
 
     @Override
