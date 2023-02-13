@@ -7,6 +7,7 @@ import com.aliyuncs.profile.IClientProfile;
 import io.github.liuruinian.phone.api.axb.delegate.AxbBindDelegate;
 import io.github.liuruinian.phone.api.axg.delegate.AxgBindDelegate;
 import io.github.liuruinian.phone.api.axn.delegate.AxnBindDelegate;
+import io.github.liuruinian.phone.api.record.delegate.PhoneRecordDelegate;
 import io.github.liuruinian.phone.api.state.delegate.StateQueryDelegate;
 import io.github.liuruinian.phone.api.subscribe.delegate.SubscriptionOperationDelegate;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
@@ -65,5 +66,10 @@ public class AliPhoneConfiguration {
     @Bean
     public SubscriptionOperationDelegate subscriptionOperationDelegate(IAcsClient acsClient) {
         return new SubscriptionOperationDelegate(acsClient);
+    }
+
+    @Bean
+    public PhoneRecordDelegate phoneRecordDelegate(IAcsClient acsClient) {
+        return new PhoneRecordDelegate(acsClient);
     }
 }
