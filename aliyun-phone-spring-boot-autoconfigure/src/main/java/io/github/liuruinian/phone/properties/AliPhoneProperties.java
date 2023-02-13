@@ -26,12 +26,35 @@ public class AliPhoneProperties {
     private Acs acs;
 
     @NestedConfigurationProperty
+    private Mns mns;
+
+    @NestedConfigurationProperty
     private ThreadPool threadPool;
 
     /**
      * poolKey
      */
     private String poolKey;
+
+    public Mns getMns() {
+        return mns;
+    }
+
+    public Acs getAcs() {
+        return acs;
+    }
+
+    public ThreadPool getThreadPool() {
+        return threadPool;
+    }
+
+    public String getPoolKey() {
+        return poolKey;
+    }
+
+    public void setPoolKey(String poolKey) {
+        this.poolKey = poolKey;
+    }
 
     /**
      * thread pool config
@@ -151,19 +174,104 @@ public class AliPhoneProperties {
         }
     }
 
-    public Acs getAcs() {
-        return acs;
-    }
+    /**
+     * mns message queue
+     *
+     * @author liuruinian
+     * @since 2023-02-13
+     */
+    public static class Mns {
+        /**
+         * message type, separate with ','
+         * <p>
+         * default: SecretStartReport、SecretReport、SecretSmsIntercept、SecretRecording
+         */
+        private String messageType = "SecretStartReport,SecretReport,SecretSmsIntercept,SecretRecording";
 
-    public ThreadPool getThreadPool() {
-        return threadPool;
-    }
+        /**
+         * Whether to enable the secret start report for call initiation
+         */
+        private Boolean enableSecretStartReport = true;
 
-    public String getPoolKey() {
-        return poolKey;
-    }
+        /**
+         * Name of the secret start report queue when the call is initiated
+         */
+        private String secretStartReportQueueName;
 
-    public void setPoolKey(String poolKey) {
-        this.poolKey = poolKey;
+        /**
+         * Whether to enable the secret end report after call end
+         */
+        private Boolean enableSecretEndReport = true;
+
+        /**
+         * Name of the secret end report queue after the call ends
+         */
+        private String secretEndReportQueueName;
+
+        /**
+         * Whether to enable recording completion event messages
+         */
+        private Boolean enableRecordingCompletionEvent = true;
+
+        /**
+         * Recording completion event message queue name
+         */
+        private String secretRecordingCompletionQueueName;
+
+        public String getMessageType() {
+            return messageType;
+        }
+
+        public void setMessageType(String messageType) {
+            this.messageType = messageType;
+        }
+
+        public Boolean getEnableSecretStartReport() {
+            return enableSecretStartReport;
+        }
+
+        public void setEnableSecretStartReport(Boolean enableSecretStartReport) {
+            this.enableSecretStartReport = enableSecretStartReport;
+        }
+
+        public String getSecretStartReportQueueName() {
+            return secretStartReportQueueName;
+        }
+
+        public void setSecretStartReportQueueName(String secretStartReportQueueName) {
+            this.secretStartReportQueueName = secretStartReportQueueName;
+        }
+
+        public Boolean getEnableSecretEndReport() {
+            return enableSecretEndReport;
+        }
+
+        public void setEnableSecretEndReport(Boolean enableSecretEndReport) {
+            this.enableSecretEndReport = enableSecretEndReport;
+        }
+
+        public String getSecretEndReportQueueName() {
+            return secretEndReportQueueName;
+        }
+
+        public void setSecretEndReportQueueName(String secretEndReportQueueName) {
+            this.secretEndReportQueueName = secretEndReportQueueName;
+        }
+
+        public Boolean getEnableRecordingCompletionEvent() {
+            return enableRecordingCompletionEvent;
+        }
+
+        public void setEnableRecordingCompletionEvent(Boolean enableRecordingCompletionEvent) {
+            this.enableRecordingCompletionEvent = enableRecordingCompletionEvent;
+        }
+
+        public String getSecretRecordingCompletionQueueName() {
+            return secretRecordingCompletionQueueName;
+        }
+
+        public void setSecretRecordingCompletionQueueName(String secretRecordingCompletionQueueName) {
+            this.secretRecordingCompletionQueueName = secretRecordingCompletionQueueName;
+        }
     }
 }

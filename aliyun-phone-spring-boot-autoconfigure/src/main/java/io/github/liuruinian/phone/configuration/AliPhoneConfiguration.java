@@ -11,6 +11,9 @@ import io.github.liuruinian.phone.api.axn.delegate.AxnBindDelegate;
 import io.github.liuruinian.phone.api.record.delegate.PhoneRecordDelegate;
 import io.github.liuruinian.phone.api.state.delegate.StateQueryDelegate;
 import io.github.liuruinian.phone.api.subscribe.delegate.SubscriptionOperationDelegate;
+import io.github.liuruinian.phone.listener.SecretEndReportListener;
+import io.github.liuruinian.phone.listener.SecretRecordingCompletionListener;
+import io.github.liuruinian.phone.listener.SecretStartReportListener;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import io.github.liuruinian.phone.threadpool.AsyncThreadPoolExecutor;
 import io.github.liuruinian.phone.threadpool.DefaultAsyncThreadPoolExecutor;
@@ -68,6 +71,25 @@ public class AliPhoneConfiguration {
             }
         }
     }
+
+    // ~ ---------------------------------------- mns message listener -------------------------------------------------
+
+    @Bean
+    public SecretStartReportListener secretStartReportListener() {
+        return new SecretStartReportListener();
+    }
+
+    @Bean
+    public SecretEndReportListener secretEndReportListener() {
+        return new SecretEndReportListener();
+    }
+
+    @Bean
+    public SecretRecordingCompletionListener secretRecordingCompletionListener() {
+        return new SecretRecordingCompletionListener();
+    }
+
+    // ~ ---------------------------------------- api delegate bean ----------------------------------------------------
 
     @Bean
     public AxnBindDelegate axnBindDelegate(IAcsClient acsClient, AsyncThreadPoolExecutor asyncThreadPoolExecutor) {
