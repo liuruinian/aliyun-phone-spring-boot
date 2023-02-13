@@ -6,6 +6,9 @@ import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import io.github.liuruinian.phone.reply.SecretEndReportListener;
 import io.github.liuruinian.phone.reply.SecretStartReportListener;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 
@@ -14,24 +17,31 @@ import javax.annotation.PostConstruct;
  * @since 2023-02-13
  */
 @Slf4j
-public class ReplyMessageQueueInitializer {
+public class ReplyMessageQueueInitializer implements ApplicationContextAware {
 
     private final AliPhoneProperties properties;
 
-    private final DefaultAlicomMessagePuller defaultAlicomMessagePuller;
+    private ApplicationContext applicationContext;
 
     private final SecretStartReportListener secretStartReportListener;
 
     private final SecretEndReportListener secretEndReportListener;
 
     public ReplyMessageQueueInitializer(AliPhoneProperties properties,
-                                        DefaultAlicomMessagePuller defaultAlicomMessagePuller,
                                         SecretStartReportListener secretStartReportListener,
                                         SecretEndReportListener secretEndReportListener) {
         this.properties = properties;
-        this.defaultAlicomMessagePuller = defaultAlicomMessagePuller;
         this.secretStartReportListener = secretStartReportListener;
         this.secretEndReportListener = secretEndReportListener;
+    }
+
+    public DefaultAlicomMessagePuller getDefaultAlicomMessagePuller() {
+        return applicationContext.getBean(DefaultAlicomMessagePuller.class);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 
     @PostConstruct
@@ -48,7 +58,7 @@ public class ReplyMessageQueueInitializer {
             String queueName = properties.getMns().getSecretStartReportQueueName();
             try {
                 log.info("[ReplyMessageQueueInitializer] - initializing the secret start report listener ......");
-                defaultAlicomMessagePuller.startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_START_REPORT, queueName, secretStartReportListener);
+                getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_START_REPORT, queueName, secretStartReportListener);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }
@@ -62,7 +72,7 @@ public class ReplyMessageQueueInitializer {
             String queueName = properties.getMns().getSecretEndReportQueueName();
             try {
                 log.info("[ReplyMessageQueueInitializer] - initializing the secret end report listener ......");
-                defaultAlicomMessagePuller.startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_END_REPORT, queueName, secretEndReportListener);
+                getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_END_REPORT, queueName, secretEndReportListener);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }

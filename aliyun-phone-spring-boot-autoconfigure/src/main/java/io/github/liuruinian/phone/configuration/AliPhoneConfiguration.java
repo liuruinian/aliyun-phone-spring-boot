@@ -16,7 +16,6 @@ import io.github.liuruinian.phone.reply.SecretEndReportListener;
 import io.github.liuruinian.phone.reply.SecretRecordingCompletionListener;
 import io.github.liuruinian.phone.reply.SecretStartReportListener;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
-import io.github.liuruinian.phone.threadpool.AsyncThreadPoolExecutor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
@@ -91,10 +90,9 @@ public class AliPhoneConfiguration {
 
     @Bean
     public ReplyMessageQueueInitializer replyMessageQueueInitializer(AliPhoneProperties properties,
-                                                                     DefaultAlicomMessagePuller defaultAlicomMessagePuller,
                                                                      SecretStartReportListener secretStartReportListener,
                                                                      SecretEndReportListener secretEndReportListener) {
-        return new ReplyMessageQueueInitializer(properties, defaultAlicomMessagePuller, secretStartReportListener, secretEndReportListener);
+        return new ReplyMessageQueueInitializer(properties, secretStartReportListener, secretEndReportListener);
     }
 
     // ~ ---------------------------------------- api delegate bean ----------------------------------------------------
