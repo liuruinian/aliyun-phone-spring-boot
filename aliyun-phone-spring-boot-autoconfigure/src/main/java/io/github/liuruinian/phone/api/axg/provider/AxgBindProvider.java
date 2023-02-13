@@ -2,8 +2,10 @@ package io.github.liuruinian.phone.api.axg.provider;
 
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxgResponse;
 import com.aliyuncs.dyplsapi.model.v20170525.CreateAxgGroupResponse;
+import com.aliyuncs.dyplsapi.model.v20170525.OperateAxgGroupResponse;
 import io.github.liuruinian.phone.domain.axg.AxgBindRequest;
 import io.github.liuruinian.phone.domain.axg.AxgCreateGroupRequest;
+import io.github.liuruinian.phone.domain.axg.UpdateAxgGroupRequest;
 import io.github.liuruinian.phone.exception.AxgGroupException;
 import io.github.liuruinian.phone.exception.BindAxgException;
 
@@ -32,4 +34,14 @@ public interface AxgBindProvider {
      * @see CreateAxgGroupResponse
      */
     CreateAxgGroupResponse createAxgGroup(AxgCreateGroupRequest request) throws AxgGroupException;
+
+    /**
+     * update axg group
+     *
+     * @param request UpdateAxgGroupRequest - https://help.aliyun.com/document_detail/400487.html#api-detail-35
+     * @return OperateAxgGroupResponse - https://help.aliyun.com/document_detail/400487.html#api-detail-40
+     * @see UpdateAxgGroupRequest
+     * @see OperateAxgGroupResponse
+     */
+    OperateAxgGroupResponse updateAxgGroup(UpdateAxgGroupRequest request) throws AxgGroupException;
 }

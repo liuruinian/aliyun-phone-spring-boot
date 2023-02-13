@@ -3,11 +3,15 @@ package io.github.liuruinian.phone.api.axg.delegate;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxgRequest;
 import com.aliyuncs.dyplsapi.model.v20170525.CreateAxgGroupRequest;
+import com.aliyuncs.dyplsapi.model.v20170525.OperateAxgGroupRequest;
 import io.github.liuruinian.phone.api.axg.provider.AbstractAxgBindProvider;
 import io.github.liuruinian.phone.domain.axg.AxgBindRequest;
 import io.github.liuruinian.phone.domain.axg.AxgCreateGroupRequest;
+import io.github.liuruinian.phone.domain.axg.UpdateAxgGroupRequest;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.util.StringUtils;
+
+import java.util.Objects;
 
 /**
  * @author liuruinian
@@ -97,5 +101,30 @@ public class AxgBindDelegate extends AbstractAxgBindProvider {
                 .to(gr::setNumbers);
 
         return gr;
+    }
+
+    @Override
+    protected OperateAxgGroupRequest buildOperateAxgGroupRequest(UpdateAxgGroupRequest request) {
+        PropertyMapper propertyMapper = PropertyMapper.get().alwaysApplyingWhenNonNull();
+        OperateAxgGroupRequest ogr = new OperateAxgGroupRequest();
+
+        // PoolKey
+        propertyMapper.from(request::getPoolKey)
+                .whenNot(p -> !StringUtils.hasLength(p))
+                .to(ogr::setPoolKey);
+        // GroupId
+        propertyMapper.from(request::getGroupId)
+                .whenNot(Objects::isNull)
+                .to(ogr::setGroupId);
+        // OperateType
+        propertyMapper.from(request::getOperateType)
+                .whenNot(o -> !StringUtils.hasLength(o))
+                .to(ogr::setOperateType);
+        // Numbers
+        propertyMapper.from(request::getNumbers)
+                .whenNot(n -> !StringUtils.hasLength(n))
+                .to(ogr::setNumbers);
+
+        return ogr;
     }
 }

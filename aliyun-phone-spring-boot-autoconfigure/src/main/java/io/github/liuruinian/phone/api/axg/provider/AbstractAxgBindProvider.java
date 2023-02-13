@@ -1,12 +1,10 @@
 package io.github.liuruinian.phone.api.axg.provider;
 
 import com.aliyuncs.IAcsClient;
-import com.aliyuncs.dyplsapi.model.v20170525.BindAxgRequest;
-import com.aliyuncs.dyplsapi.model.v20170525.BindAxgResponse;
-import com.aliyuncs.dyplsapi.model.v20170525.CreateAxgGroupRequest;
-import com.aliyuncs.dyplsapi.model.v20170525.CreateAxgGroupResponse;
+import com.aliyuncs.dyplsapi.model.v20170525.*;
 import io.github.liuruinian.phone.domain.axg.AxgBindRequest;
 import io.github.liuruinian.phone.domain.axg.AxgCreateGroupRequest;
+import io.github.liuruinian.phone.domain.axg.UpdateAxgGroupRequest;
 import io.github.liuruinian.phone.exception.AxgGroupException;
 import io.github.liuruinian.phone.exception.BindAxgException;
 
@@ -57,4 +55,22 @@ public abstract class AbstractAxgBindProvider implements AxgBindProvider {
     }
 
     protected abstract CreateAxgGroupRequest buildAxgCreateGroupRequest(AxgCreateGroupRequest request);
+
+    @Override
+    public OperateAxgGroupResponse updateAxgGroup(UpdateAxgGroupRequest request) throws AxgGroupException {
+        try {
+            OperateAxgGroupRequest groupRequest = buildOperateAxgGroupRequest(request);
+
+            OperateAxgGroupResponse response = acsClient.getAcsResponse(groupRequest);
+            if (response.getCode() != null && "OK".equals(response.getCode())) {
+                return response;
+            }
+        } catch (Exception e) {
+            throw new AxgGroupException(e);
+        }
+
+        return null;
+    }
+
+    protected abstract OperateAxgGroupRequest buildOperateAxgGroupRequest(UpdateAxgGroupRequest request);
 }
