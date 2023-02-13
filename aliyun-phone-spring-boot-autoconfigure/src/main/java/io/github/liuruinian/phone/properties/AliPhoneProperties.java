@@ -191,7 +191,7 @@ public class AliPhoneProperties {
         /**
          * Whether to enable the secret start report for call initiation
          */
-        private Boolean enableSecretStartReport = true;
+        private Boolean enableSecretStartReport = false;
 
         /**
          * Name of the secret start report queue when the call is initiated
@@ -201,7 +201,7 @@ public class AliPhoneProperties {
         /**
          * Whether to enable the secret end report after call end
          */
-        private Boolean enableSecretEndReport = true;
+        private Boolean enableSecretEndReport = false;
 
         /**
          * Name of the secret end report queue after the call ends
@@ -211,7 +211,7 @@ public class AliPhoneProperties {
         /**
          * Whether to enable recording completion event messages
          */
-        private Boolean enableRecordingCompletionEvent = true;
+        private Boolean enableRecordingCompletionEvent = false;
 
         /**
          * Recording completion event message queue name
