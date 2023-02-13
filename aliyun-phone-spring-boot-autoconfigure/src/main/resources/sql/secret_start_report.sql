@@ -13,4 +13,4 @@ CREATE TABLE `secret_start_report` (
   `control_msg` varchar(50) DEFAULT 'NO_SUBS_EXIST' COMMENT '无绑定关系时返回NO_SUBS_EXIST',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `idx_call_id` (`call_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='呼叫发起时话单回执消息SecretStartReport';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='呼叫发起时话单回执消息SecretStartReport';

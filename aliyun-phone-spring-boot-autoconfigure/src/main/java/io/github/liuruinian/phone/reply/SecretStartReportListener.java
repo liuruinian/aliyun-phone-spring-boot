@@ -91,7 +91,7 @@ public class SecretStartReportListener implements MessageListener, ApplicationCo
             }
         } catch (BeansException e) {
             if (log.isErrorEnabled()) {
-                log.error("store secret report failed, no bean found: SecretStartReportStore.");
+                log.error("store secret start report failed, no bean found: SecretStartReportStore.");
             }
         }
 
