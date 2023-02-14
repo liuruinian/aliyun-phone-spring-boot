@@ -21,7 +21,7 @@ public abstract class AbstractAxgBindProvider implements AxgBindProvider {
     }
 
     @Override
-    public BindAxgResponse bingAxg(AxgBindRequest request) throws BindAxgException {
+    public BindAxgResponse bindAxg(AxgBindRequest request) throws BindAxgException {
         try {
             BindAxgRequest axgRequest = buildBindAxgRequest(request);
 

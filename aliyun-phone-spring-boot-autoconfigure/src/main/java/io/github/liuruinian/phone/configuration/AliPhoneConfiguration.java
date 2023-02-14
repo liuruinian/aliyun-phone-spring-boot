@@ -16,6 +16,8 @@ import io.github.liuruinian.phone.mnsreply.SecretEndReportListener;
 import io.github.liuruinian.phone.mnsreply.SecretRecordingCompletionListener;
 import io.github.liuruinian.phone.mnsreply.SecretStartReportListener;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
+import io.github.liuruinian.phone.threadpool.AsyncThreadPoolExecutor;
+import io.github.liuruinian.phone.threadpool.DefaultAsyncThreadPoolExecutor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
@@ -43,13 +45,13 @@ public class AliPhoneConfiguration {
         return new DefaultAcsClient(profile);
     }
 
-//    @Bean
-//    public AsyncThreadPoolExecutor asyncThreadPoolExecutor(AliPhoneProperties properties) {
-//        return new DefaultAsyncThreadPoolExecutor(properties);
-//    }
+    @Bean
+    public AsyncThreadPoolExecutor asyncThreadPoolExecutor(AliPhoneProperties properties) {
+        return new DefaultAsyncThreadPoolExecutor(properties);
+    }
 
     /**
-     * ali message puller
+     * ali message puller, it should be prototype.
      */
     @Bean
     @Scope(ConfigurableListableBeanFactory.SCOPE_PROTOTYPE)

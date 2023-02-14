@@ -23,7 +23,7 @@ public interface AxgBindProvider {
      * @see AxgBindRequest
      * @see BindAxgResponse
      */
-    BindAxgResponse bingAxg(AxgBindRequest request) throws BindAxgException;
+    BindAxgResponse bindAxg(AxgBindRequest request) throws BindAxgException;
 
     /**
      * create axg group
