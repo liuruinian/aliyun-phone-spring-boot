@@ -11,10 +11,21 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public abstract class AbstractAsyncThreadPoolExecutor implements AsyncThreadPoolExecutor {
 
-    protected final AliPhoneProperties properties;
+    protected final AliPhoneProperties prop;
+
+    private final ThreadPoolExecutor executor;
 
     public AbstractAsyncThreadPoolExecutor(AliPhoneProperties properties) {
-        this.properties = properties;
+        this.prop = properties;
+        AliPhoneProperties.ThreadPool pool = prop.getThreadPool();
+        executor = new ThreadPoolExecutor(
+                pool.getCorePoolSize(),
+                pool.getMaximumPoolSize(),
+                pool.getKeepAliveTime(),
+                pool.getUnit(),
+                new LinkedBlockingQueue<>(pool.getQueueCapacity()),
+                new DefaultThreadFactory(),
+                buildRejectedExecutionHandler(pool.getRejectPolicy()));
     }
 
     /**
@@ -61,7 +72,12 @@ public abstract class AbstractAsyncThreadPoolExecutor implements AsyncThreadPool
     /**
      * @param command command
      */
-    protected abstract void submit0(Runnable command);
+    protected void submit0(Runnable command) {
+        if (command == null) {
+            return;
+        }
+        executor.execute(command);
+    }
 
     protected static class DefaultThreadFactory implements ThreadFactory {
 
