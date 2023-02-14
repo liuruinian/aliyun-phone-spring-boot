@@ -18,13 +18,6 @@
       "type": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties",
       "sourceMethod": "getMns()"
-    },
-    {
-      "name": "phone.protection.ali.thread-pool",
-      "type": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
-      "description": "阿里云号码隐私保护线程池配置.",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties",
-      "sourceMethod": "getThreadPool()"
     }
   ],
   "properties": [
@@ -98,42 +91,6 @@
       "type": "java.lang.String",
       "description": "Name of the secret start report queue when the call is initiated.",
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
-    },
-    {
-      "name": "phone.protection.ali.thread-pool.core-pool-size",
-      "type": "java.lang.Integer",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
-      "defaultValue": "Runtime.getRuntime().availableProcessors()"
-    },
-    {
-      "name": "phone.protection.ali.thread-pool.keep-alive-time",
-      "type": "java.lang.Long",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
-      "defaultValue": 60
-    },
-    {
-      "name": "phone.protection.ali.thread-pool.maximum-pool-size",
-      "type": "java.lang.Integer",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
-      "defaultValue": "Runtime.getRuntime().availableProcessors() * 2"
-    },
-    {
-      "name": "phone.protection.ali.thread-pool.queue-capacity",
-      "type": "java.lang.Integer",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
-      "defaultValue": "Integer.MAX_VALUE"
-    },
-    {
-      "name": "phone.protection.ali.thread-pool.reject-policy",
-      "type": "io.github.liuruinian.phone.properties.RejectPolicy",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
-      "defaultValue": "Abort"
-    },
-    {
-      "name": "phone.protection.ali.thread-pool.unit",
-      "type": "java.util.concurrent.TimeUnit",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
-      "defaultValue": "SECONDS"
     }
   ],
   "hints": []

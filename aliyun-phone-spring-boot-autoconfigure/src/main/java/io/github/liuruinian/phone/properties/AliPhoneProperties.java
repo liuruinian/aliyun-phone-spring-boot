@@ -3,8 +3,6 @@ package io.github.liuruinian.phone.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * @author liuruinian
  * @since 2023-02-07
@@ -28,9 +26,6 @@ public class AliPhoneProperties {
     @NestedConfigurationProperty
     private Mns mns;
 
-    @NestedConfigurationProperty
-    private ThreadPool threadPool;
-
     /**
      * poolKey
      */
@@ -52,14 +47,6 @@ public class AliPhoneProperties {
         this.mns = mns;
     }
 
-    public ThreadPool getThreadPool() {
-        return threadPool;
-    }
-
-    public void setThreadPool(ThreadPool threadPool) {
-        this.threadPool = threadPool;
-    }
-
     public String getPoolKey() {
         return poolKey;
     }
@@ -67,76 +54,6 @@ public class AliPhoneProperties {
     public void setPoolKey(String poolKey) {
         this.poolKey = poolKey;
     }
-
-    /**
-     * thread pool config
-     *
-     * @author liuruinian
-     * @since 2023-02-07
-     */
-    public static class ThreadPool {
-
-        private int corePoolSize = Runtime.getRuntime().availableProcessors();
-
-        private int maximumPoolSize = Runtime.getRuntime().availableProcessors() * 2;
-
-        private long keepAliveTime = 60L;
-
-        private TimeUnit unit = TimeUnit.SECONDS;
-
-        private int queueCapacity = Integer.MAX_VALUE;
-
-        private RejectPolicy rejectPolicy = RejectPolicy.Abort;
-
-        public int getCorePoolSize() {
-            return corePoolSize;
-        }
-
-        public void setCorePoolSize(int corePoolSize) {
-            this.corePoolSize = corePoolSize;
-        }
-
-        public int getMaximumPoolSize() {
-            return maximumPoolSize;
-        }
-
-        public void setMaximumPoolSize(int maximumPoolSize) {
-            this.maximumPoolSize = maximumPoolSize;
-        }
-
-        public long getKeepAliveTime() {
-            return keepAliveTime;
-        }
-
-        public void setKeepAliveTime(long keepAliveTime) {
-            this.keepAliveTime = keepAliveTime;
-        }
-
-        public TimeUnit getUnit() {
-            return unit;
-        }
-
-        public void setUnit(TimeUnit unit) {
-            this.unit = unit;
-        }
-
-        public int getQueueCapacity() {
-            return queueCapacity;
-        }
-
-        public void setQueueCapacity(int queueCapacity) {
-            this.queueCapacity = queueCapacity;
-        }
-
-        public RejectPolicy getRejectPolicy() {
-            return rejectPolicy;
-        }
-
-        public void setRejectPolicy(RejectPolicy rejectPolicy) {
-            this.rejectPolicy = rejectPolicy;
-        }
-    }
-
 
     /**
      * IAcsClientProfile
