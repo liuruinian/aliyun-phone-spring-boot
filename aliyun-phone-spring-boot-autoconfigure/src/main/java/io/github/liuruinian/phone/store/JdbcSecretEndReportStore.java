@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * @author liuruinian
@@ -77,7 +78,7 @@ public class JdbcSecretEndReportStore implements SecretEndReportStore {
                 ps.setString(14, report.getRingTime());
                 ps.setString(15, report.getFreeRingTime());
                 ps.setString(16, report.getReleaseTime());
-                ps.setInt(17, report.getSmsNumber());
+                ps.setInt(17, Optional.ofNullable(report.getSmsNumber()).orElse(0));
                 ps.setInt(18, report.getReleaseDir());
                 ps.setString(19, report.getOutId());
                 ps.setInt(20, report.getUnconnectedCause());

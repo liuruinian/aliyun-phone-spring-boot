@@ -102,7 +102,8 @@
     {
       "name": "phone.protection.ali.thread-pool.core-pool-size",
       "type": "java.lang.Integer",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
+      "defaultValue": "Runtime.getRuntime().availableProcessors()"
     },
     {
       "name": "phone.protection.ali.thread-pool.keep-alive-time",
@@ -113,22 +114,26 @@
     {
       "name": "phone.protection.ali.thread-pool.maximum-pool-size",
       "type": "java.lang.Integer",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
+      "defaultValue": "Runtime.getRuntime().availableProcessors() * 2"
     },
     {
       "name": "phone.protection.ali.thread-pool.queue-capacity",
       "type": "java.lang.Integer",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
+      "defaultValue": "Integer.MAX_VALUE"
     },
     {
       "name": "phone.protection.ali.thread-pool.reject-policy",
       "type": "io.github.liuruinian.phone.properties.RejectPolicy",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
+      "defaultValue": "Abort"
     },
     {
       "name": "phone.protection.ali.thread-pool.unit",
       "type": "java.util.concurrent.TimeUnit",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool"
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$ThreadPool",
+      "defaultValue": "SECONDS"
     }
   ],
   "hints": []
