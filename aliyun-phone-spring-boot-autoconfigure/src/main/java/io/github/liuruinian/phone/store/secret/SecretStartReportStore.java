@@ -1,4 +1,4 @@
-package io.github.liuruinian.phone.store;
+package io.github.liuruinian.phone.store.secret;
 
 import java.util.Collection;
 

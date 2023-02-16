@@ -7,12 +7,15 @@ import com.aliyuncs.dyplsapi.model.v20170525.BindAxnRequest;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnResponse;
 import io.github.liuruinian.phone.domain.axn.AxnBindExtensionRequest;
 import io.github.liuruinian.phone.domain.axn.AxnBindRequest;
-import io.github.liuruinian.phone.api.axn.processor.BindAxnPostProcessor;
 import io.github.liuruinian.phone.exception.BindAxnException;
+import io.github.liuruinian.phone.store.axn.BindAxnRecord;
+import io.github.liuruinian.phone.store.axn.BindAxnRecordStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
+import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import java.util.Collections;
 
 /**
  * @author liuruinian
@@ -37,25 +40,41 @@ public abstract class AbstractAxnBindProvider implements AxnBindProvider, Applic
     @Override
     public BindAxnResponse bindAxn(AxnBindRequest request) throws BindAxnException {
 
-        BindAxnPostProcessor bindAxnPostProcessor = null;
+        BindAxnRecordStore bindAxnRecordStore = null;
         try {
-            bindAxnPostProcessor = applicationContext.getBean(BindAxnPostProcessor.class);
+            bindAxnRecordStore = applicationContext.getBean(BindAxnRecordStore.class);
         } catch (BeansException e) {
             if (log.isDebugEnabled()) {
-                log.debug("No bean founded: BindAxnPostProcessor");
+                log.debug("No bean founded: BindAxnRecordStore");
             }
         }
 
         try {
             BindAxnRequest axnRequest = buildBindAxnRequest(request);
-            if (bindAxnPostProcessor != null) {
-                bindAxnPostProcessor.postProcessBeforeBind(axnRequest);
-            }
 
             BindAxnResponse response = acsClient.getAcsResponse(axnRequest);
             if (response.getCode() != null && "OK".equals(response.getCode())) {
-                if (bindAxnPostProcessor != null) {
-                    bindAxnPostProcessor.postProcessAfterBind(response);
+                if (bindAxnRecordStore != null) {
+                    PropertyMapper propertyMapper = PropertyMapper.get().alwaysApplyingWhenNonNull();
+                    BindAxnRecord bindAxnRecord = new BindAxnRecord();
+                    BindAxnResponse.SecretBindDTO dto = response.getSecretBindDTO();
+
+                    propertyMapper.from(response::getCode)
+                            .to(bindAxnRecord::setCode);
+                    propertyMapper.from(response::getMessage)
+                            .to(bindAxnRecord::setMessage);
+                    propertyMapper.from(response::getRequestId)
+                            .to(bindAxnRecord::setRequestId);
+                    propertyMapper.from(dto::getSubsId)
+                            .to(bindAxnRecord::setSubsId);
+                    propertyMapper.from(dto::getExtension)
+                            .to(bindAxnRecord::setExtension);
+                    propertyMapper.from(dto::getSecretNo)
+                            .to(bindAxnRecord::setSecretNo);
+                    propertyMapper.from(request::getPoolKey)
+                            .to(bindAxnRecord::setPoolKey);
+
+                    bindAxnRecordStore.addBindAxnRecords(Collections.singleton(bindAxnRecord));
                 }
                 return response;
             }

@@ -1,4 +1,4 @@
-package io.github.liuruinian.phone.store;
+package io.github.liuruinian.phone.store.secret;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
