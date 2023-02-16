@@ -26,11 +26,6 @@ public class AliPhoneProperties {
     @NestedConfigurationProperty
     private Mns mns;
 
-    /**
-     * poolKey
-     */
-    private String poolKey;
-
     public Acs getAcs() {
         return acs;
     }
@@ -45,14 +40,6 @@ public class AliPhoneProperties {
 
     public void setMns(Mns mns) {
         this.mns = mns;
-    }
-
-    public String getPoolKey() {
-        return poolKey;
-    }
-
-    public void setPoolKey(String poolKey) {
-        this.poolKey = poolKey;
     }
 
     /**

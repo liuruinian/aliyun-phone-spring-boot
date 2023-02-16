@@ -2,7 +2,7 @@ CREATE TABLE `secret_end_report` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `pool_key` varchar(50) DEFAULT '' COMMENT '号码池key',
   `sub_id` bigint(20) DEFAULT '0' COMMENT '绑定关系ID',
-  `record_url` varchar(255) DEFAULT NULL COMMENT '录音下载URL',
+  `download_url` varchar(255) DEFAULT NULL COMMENT '录音下载URL',
   `ring_record_url` varchar(255) DEFAULT NULL COMMENT '放音录音URL',
   `call_id` varchar(100) NOT NULL DEFAULT '' COMMENT '唯一标识一通通话记录的ID',
   `phone_no` varchar(50) DEFAULT '' COMMENT 'A号码',

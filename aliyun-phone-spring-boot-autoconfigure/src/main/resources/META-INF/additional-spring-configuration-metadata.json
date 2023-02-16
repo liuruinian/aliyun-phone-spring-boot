@@ -22,12 +22,6 @@
   ],
   "properties": [
     {
-      "name": "phone.protection.ali.pool-key",
-      "type": "java.lang.String",
-      "description": "poolKey.",
-      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties"
-    },
-    {
       "name": "phone.protection.ali.acs.access-key-id",
       "type": "java.lang.String",
       "description": "accessKeyId.",
