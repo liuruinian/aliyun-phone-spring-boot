@@ -10,7 +10,7 @@ CREATE TABLE `bind_detail` (
   `phone_no_a` varchar(50) DEFAULT '' COMMENT 'phoneNoA',
   `phone_no_b` varchar(50) DEFAULT '' COMMENT 'phoneNoB',
   `phone_no_x` varchar(50) DEFAULT '' COMMENT 'phoneNoX',
-  `group_id` bigint(20) DEFAULT NULL COMMENT '组ID',
+  `group_id` varchar(100) DEFAULT '' COMMENT '组ID',
   `gmt_create` datetime DEFAULT NULL COMMENT '绑定关系创建时间',
   `expire_date` datetime DEFAULT NULL COMMENT '绑定关系失效时间',
   `need_record` varchar(5) DEFAULT '' COMMENT '是否对该绑定关系产生的所有通话，进行通话录音 false：不录音 true：录音',

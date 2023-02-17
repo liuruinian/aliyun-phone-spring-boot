@@ -68,7 +68,7 @@ public class JdbcBindDetailStore implements BindDetailStore {
                 ps.setString(8, detail.getPhoneNoA());
                 ps.setString(9, detail.getPhoneNoB());
                 ps.setString(10, detail.getPhoneNoX());
-                ps.setLong(11, detail.getGroupId());
+                ps.setString(11, String.valueOf(detail.getGroupId()));
                 ps.setString(12, detail.getGmtCreate());
                 ps.setString(13, detail.getExpireDate());
                 ps.setString(14, String.valueOf(detail.getNeedRecord()));
