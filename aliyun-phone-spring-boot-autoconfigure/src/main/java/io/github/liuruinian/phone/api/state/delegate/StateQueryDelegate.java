@@ -35,6 +35,14 @@ public class StateQueryDelegate extends AbstractStateQueryProvider {
                 .whenNot(phoneNoA -> !StringUtils.hasLength(phoneNoA))
                 .to(subscriptionDetailRequest::setPhoneNoX);
 
+        // PoolKey
+        propertyMapper.from(request::getPoolKey)
+                .to(subscriptionDetailRequest::setPoolKey);
+
+        // ProductType
+        propertyMapper.from(request::getProductType)
+                .to(subscriptionDetailRequest::setProductType);
+
         return subscriptionDetailRequest;
     }
 
