@@ -74,7 +74,7 @@ public abstract class AbstractAxnBindProvider implements AxnBindProvider, Applic
                     bindAxnRecordStore.addBindAxnRecords(Collections.singleton(bindAxnRecord));
 
                     // BindDetailStore
-                    saveBindDetail(request.getPoolKey(), dto.getSubsId());
+                    saveBindDetail(dto.getSecretNo(), dto.getSubsId(), request.getPoolKey());
                 }
             }
 
@@ -115,7 +115,7 @@ public abstract class AbstractAxnBindProvider implements AxnBindProvider, Applic
 
                     bindAxnRecordStore.addBindAxnRecords(Collections.singleton(bindAxnRecord));
 
-                    saveBindDetail(request.getPoolKey(), dto.getSubsId());
+                    saveBindDetail(dto.getSecretNo(), dto.getSubsId(), request.getPoolKey());
                 }
             }
 
@@ -127,11 +127,11 @@ public abstract class AbstractAxnBindProvider implements AxnBindProvider, Applic
 
     protected abstract BindAxnExtensionRequest buildBindAxnExtensionRequest(AxnBindExtensionRequest request);
 
-    protected boolean saveBindDetail(String poolKey, String subsId) {
+    protected boolean saveBindDetail(String secretNo, String subsId, String poolKey) {
         PropertyMapper propertyMapper = PropertyMapper.get().alwaysApplyingWhenNonNull();
         if (stateQueryDelegate != null) {
             SubscriptionDetailRequest subscriptionDetailRequest =
-                    SubscriptionDetailRequest.builder().subsId(subsId).phoneNoX(poolKey).build();
+                    SubscriptionDetailRequest.builder().subsId(subsId).phoneNoX(secretNo).build();
 
             QuerySubscriptionDetailResponse subscriptionDetailResponse =
                     stateQueryDelegate.querySubscriptionDetail(subscriptionDetailRequest);
