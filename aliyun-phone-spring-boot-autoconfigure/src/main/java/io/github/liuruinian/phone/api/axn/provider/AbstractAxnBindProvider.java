@@ -131,7 +131,11 @@ public abstract class AbstractAxnBindProvider implements AxnBindProvider, Applic
         PropertyMapper propertyMapper = PropertyMapper.get().alwaysApplyingWhenNonNull();
         if (stateQueryDelegate != null) {
             SubscriptionDetailRequest subscriptionDetailRequest =
-                    SubscriptionDetailRequest.builder().subsId(subsId).phoneNoX(secretNo).build();
+                    SubscriptionDetailRequest.builder()
+                            .subsId(subsId)
+                            .phoneNoX(secretNo)
+                            .poolKey(poolKey)
+                            .productType("AXN_170").build();
 
             QuerySubscriptionDetailResponse subscriptionDetailResponse =
                     stateQueryDelegate.querySubscriptionDetail(subscriptionDetailRequest);

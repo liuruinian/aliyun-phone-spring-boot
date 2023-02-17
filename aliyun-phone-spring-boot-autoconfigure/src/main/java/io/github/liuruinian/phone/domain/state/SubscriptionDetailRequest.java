@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
@@ -32,4 +33,21 @@ public class SubscriptionDetailRequest implements Serializable {
      */
     @JsonProperty(value = "PhoneNoX")
     private String phoneNoX;
+
+    /**
+     * 号码池key
+     */
+    @JsonProperty(value = "PoolKey")
+    private String poolKey;
+
+    /**
+     * 产品类型.
+     * <p>
+     * AXB_170。<br>
+     * AXN_170。<br>
+     * AXN_95。<br>
+     * AXN_EXTENSION_REUSE
+     */
+    @JsonProperty(value = "ProductType")
+    private String productType;
 }
