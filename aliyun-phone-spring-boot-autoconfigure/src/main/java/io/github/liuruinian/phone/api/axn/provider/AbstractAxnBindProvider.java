@@ -1,5 +1,6 @@
 package io.github.liuruinian.phone.api.axn.provider;
 
+import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnExtensionRequest;
 import com.aliyuncs.dyplsapi.model.v20170525.BindAxnExtensionResponse;
@@ -51,6 +52,9 @@ public abstract class AbstractAxnBindProvider implements AxnBindProvider, Applic
 
         try {
             BindAxnRequest axnRequest = buildBindAxnRequest(request);
+            if (log.isInfoEnabled()) {
+                log.info("[AbstractAxnBindProvider] - axnRequest: \n{}", JSONObject.toJSONString(axnRequest, true));
+            }
 
             BindAxnResponse response = acsClient.getAcsResponse(axnRequest);
             if (response.getCode() != null && "OK".equals(response.getCode())) {
@@ -76,13 +80,12 @@ public abstract class AbstractAxnBindProvider implements AxnBindProvider, Applic
 
                     bindAxnRecordStore.addBindAxnRecords(Collections.singleton(bindAxnRecord));
                 }
-                return response;
             }
+
+            return response;
         } catch (Exception e) {
             throw new BindAxnException(e);
         }
-
-        return null;
     }
 
     protected abstract BindAxnRequest buildBindAxnRequest(AxnBindRequest request);
