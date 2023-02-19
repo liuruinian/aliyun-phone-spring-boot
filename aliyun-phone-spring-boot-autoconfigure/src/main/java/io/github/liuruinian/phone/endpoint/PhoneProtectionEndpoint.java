@@ -4,6 +4,7 @@ import com.aliyuncs.dyplsapi.model.v20170525.*;
 import io.github.liuruinian.phone.api.axb.delegate.AxbBindDelegate;
 import io.github.liuruinian.phone.api.axg.delegate.AxgBindDelegate;
 import io.github.liuruinian.phone.api.axn.delegate.AxnBindDelegate;
+import io.github.liuruinian.phone.api.record.delegate.PhoneRecordDelegate;
 import io.github.liuruinian.phone.api.state.delegate.StateQueryDelegate;
 import io.github.liuruinian.phone.api.subscribe.delegate.SubscriptionOperationDelegate;
 import io.github.liuruinian.phone.domain.axb.AxbBindRequest;
@@ -12,6 +13,9 @@ import io.github.liuruinian.phone.domain.axg.AxgCreateGroupRequest;
 import io.github.liuruinian.phone.domain.axg.UpdateAxgGroupRequest;
 import io.github.liuruinian.phone.domain.axn.AxnBindExtensionRequest;
 import io.github.liuruinian.phone.domain.axn.AxnBindRequest;
+import io.github.liuruinian.phone.domain.record.RecordDownloadUrlRequest;
+import io.github.liuruinian.phone.domain.record.RingPublicUrlRequest;
+import io.github.liuruinian.phone.domain.record.SecretAsrDetailRequest;
 import io.github.liuruinian.phone.domain.state.SecretNoDetailRequest;
 import io.github.liuruinian.phone.domain.state.SubsIdRequest;
 import io.github.liuruinian.phone.domain.state.SubscriptionDetailRequest;
@@ -47,6 +51,9 @@ public class PhoneProtectionEndpoint {
     @Resource
     private SubscriptionOperationDelegate subscriptionOperationDelegate;
 
+    @Resource
+    private PhoneRecordDelegate phoneRecordDelegate;
+
     // ~ --------------------------------------------- AXN -------------------------------------------------
 
     @PostMapping(path = "/bind_axn")
@@ -81,6 +88,23 @@ public class PhoneProtectionEndpoint {
     @PostMapping(path = "/update_axg_group")
     public ResponseEntity<OperateAxgGroupResponse> updateAxgGroup(@RequestBody UpdateAxgGroupRequest request) {
         return ResponseEntity.ok(axgBindDelegate.updateAxgGroup(request));
+    }
+
+    // ~ ---------------------------------------------- Record ---------------------------------------------
+
+    @PostMapping(path = "/query_record_file_download_url")
+    public ResponseEntity<QueryRecordFileDownloadUrlResponse> queryRecordFileDownloadUrl(@RequestBody RecordDownloadUrlRequest request) {
+        return ResponseEntity.ok(phoneRecordDelegate.queryRecordFileDownloadUrl(request));
+    }
+
+    @PostMapping(path = "/query_ring_public_url")
+    public ResponseEntity<GetTotalPublicUrlResponse> queryRingPublicUrl(@RequestBody RingPublicUrlRequest request) {
+        return ResponseEntity.ok(phoneRecordDelegate.queryRingPublicUrl(request));
+    }
+
+    @PostMapping(path = "/query_secret_asr_detail")
+    public ResponseEntity<GetSecretAsrDetailResponse> querySecretAsrDetail(@RequestBody SecretAsrDetailRequest request) {
+        return ResponseEntity.ok(phoneRecordDelegate.querySecretAsrDetail(request));
     }
 
     // ~ ---------------------------------------------- State ----------------------------------------------
