@@ -47,10 +47,11 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
                 String downloadUrl = response.getDownloadUrl();
                 URL url = ResourceUtils.getURL(downloadUrl);
                 String file = url.getFile();
+                String name = file.substring(1, file.indexOf("?"));
                 // upload ali oss
                 InputStream inputStream = url.openStream();
-                ossClient.putObject(prop.getOss().getBucketName(), file.substring(1, file.indexOf("?")), inputStream);
-                String ossUrl = "https://" + prop.getOss().getDomain() + file;
+                ossClient.putObject(prop.getOss().getBucketName(), name, inputStream);
+                String ossUrl = "https://" + prop.getOss().getDomain() + "/" + name;
                 response.setDownloadUrl(ossUrl);
             }
 
