@@ -26,6 +26,9 @@ public class AliPhoneProperties {
     @NestedConfigurationProperty
     private Mns mns;
 
+    @NestedConfigurationProperty
+    private Oss oss;
+
     public Acs getAcs() {
         return acs;
     }
@@ -40,6 +43,14 @@ public class AliPhoneProperties {
 
     public void setMns(Mns mns) {
         this.mns = mns;
+    }
+
+    public Oss getOss() {
+        return oss;
+    }
+
+    public void setOss(Oss oss) {
+        this.oss = oss;
     }
 
     /**
@@ -188,6 +199,66 @@ public class AliPhoneProperties {
 
         public void setSecretRecordingCompletionQueueName(String secretRecordingCompletionQueueName) {
             this.secretRecordingCompletionQueueName = secretRecordingCompletionQueueName;
+        }
+    }
+
+    /**
+     * ali oss profile
+     */
+    public static class Oss {
+        /** endpoint */
+        private String endpoint;
+
+        /** access-key-id */
+        private String accessKeyId;
+
+        /** access-key-secret */
+        private String accessKeySecret;
+
+        /** bucket-name */
+        private String bucketName;
+
+        /** domain */
+        private String domain;
+
+        public String getEndpoint() {
+            return endpoint;
+        }
+
+        public void setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
+        }
+
+        public String getAccessKeyId() {
+            return accessKeyId;
+        }
+
+        public void setAccessKeyId(String accessKeyId) {
+            this.accessKeyId = accessKeyId;
+        }
+
+        public String getAccessKeySecret() {
+            return accessKeySecret;
+        }
+
+        public void setAccessKeySecret(String accessKeySecret) {
+            this.accessKeySecret = accessKeySecret;
+        }
+
+        public String getBucketName() {
+            return bucketName;
+        }
+
+        public void setBucketName(String bucketName) {
+            this.bucketName = bucketName;
+        }
+
+        public String getDomain() {
+            return domain;
+        }
+
+        public void setDomain(String domain) {
+            this.domain = domain;
         }
     }
 }

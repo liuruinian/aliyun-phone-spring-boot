@@ -18,6 +18,12 @@
       "type": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties",
       "sourceMethod": "getMns()"
+    },
+    {
+      "name": "phone.protection.ali.oss",
+      "type": "io.github.liuruinian.phone.properties.AliPhoneProperties$Oss",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties",
+      "sourceMethod": "getOss()"
     }
   ],
   "properties": [
@@ -85,6 +91,36 @@
       "type": "java.lang.String",
       "description": "Name of the secret start report queue when the call is initiated.",
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
+    },
+    {
+      "name": "phone.protection.ali.oss.access-key-id",
+      "type": "java.lang.String",
+      "description": "access-key-id.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Oss"
+    },
+    {
+      "name": "phone.protection.ali.oss.access-key-secret",
+      "type": "java.lang.String",
+      "description": "access-key-secret.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Oss"
+    },
+    {
+      "name": "phone.protection.ali.oss.bucket-name",
+      "type": "java.lang.String",
+      "description": "bucket-name.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Oss"
+    },
+    {
+      "name": "phone.protection.ali.oss.domain",
+      "type": "java.lang.String",
+      "description": "domain.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Oss"
+    },
+    {
+      "name": "phone.protection.ali.oss.endpoint",
+      "type": "java.lang.String",
+      "description": "endpoint.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Oss"
     }
   ],
   "hints": []

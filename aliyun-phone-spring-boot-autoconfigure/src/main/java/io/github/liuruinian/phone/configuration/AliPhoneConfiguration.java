@@ -1,6 +1,7 @@
 package io.github.liuruinian.phone.configuration;
 
 import com.alicom.mns.tools.DefaultAlicomMessagePuller;
+import com.aliyun.oss.OSSClient;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
@@ -17,6 +18,7 @@ import io.github.liuruinian.phone.mnsreply.SecretRecordingCompletionListener;
 import io.github.liuruinian.phone.mnsreply.SecretStartReportListener;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 import org.springframework.core.type.AnnotatedTypeMetadata;
@@ -41,6 +43,16 @@ public class AliPhoneConfiguration {
         DefaultProfile.addEndpoint(endPoint, AliPhoneProperties.PRODUCT, AliPhoneProperties.DOMAIN);
 
         return new DefaultAcsClient(profile);
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "phone.protection.ali.oss", name = "access-key-id")
+    public OSSClient ossClient(AliPhoneProperties properties) {
+        AliPhoneProperties.Oss oss = properties.getOss();
+        String accessKeyId = oss.getAccessKeyId();
+        String accessKeySecret = oss.getAccessKeySecret();
+        String endpoint = oss.getEndpoint();
+        return new OSSClient(endpoint, accessKeyId, accessKeySecret);
     }
 
     /**
@@ -119,7 +131,7 @@ public class AliPhoneConfiguration {
     }
 
     @Bean
-    public PhoneRecordDelegate phoneRecordDelegate(IAcsClient acsClient) {
-        return new PhoneRecordDelegate(acsClient);
+    public PhoneRecordDelegate phoneRecordDelegate(IAcsClient acsClient, AliPhoneProperties properties) {
+        return new PhoneRecordDelegate(acsClient, properties);
     }
 }

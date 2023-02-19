@@ -8,6 +8,7 @@ import io.github.liuruinian.phone.api.record.provider.AbstractPhoneRecordProvide
 import io.github.liuruinian.phone.domain.record.RecordDownloadUrlRequest;
 import io.github.liuruinian.phone.domain.record.RingPublicUrlRequest;
 import io.github.liuruinian.phone.domain.record.SecretAsrDetailRequest;
+import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.util.StringUtils;
 import java.util.Objects;
@@ -18,8 +19,8 @@ import java.util.Objects;
  */
 public class PhoneRecordDelegate extends AbstractPhoneRecordProvider {
 
-    public PhoneRecordDelegate(IAcsClient acsClient) {
-        super(acsClient);
+    public PhoneRecordDelegate(IAcsClient acsClient, AliPhoneProperties properties) {
+        super(acsClient, properties);
     }
 
     @Override
