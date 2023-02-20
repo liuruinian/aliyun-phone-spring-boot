@@ -20,11 +20,13 @@ public class JdbcSecretRecordUrlStore implements SecretRecordUrlStore {
 
     private static final String FIELDS = "call_id,call_time,download_url";
 
+    private static final String QUERY_FIELDS = "id,call_id,call_time,download_url,create_time,update_time";
+
     private static final RowMapper<SecretRecordUrl> rowMapper = new SecretRecordRowMapper();
 
     private static final String WHERE_KEY = "where call_id = ?";
 
-    private static final String DEFAULT_GET_SECRET_RECORD_URL_SQL = String.format("select %s from %s " + WHERE_KEY, FIELDS, TABLE_NAME);
+    private static final String DEFAULT_GET_SECRET_RECORD_URL_SQL = String.format("select %s from %s " + WHERE_KEY, QUERY_FIELDS, TABLE_NAME);
 
     private static final String DEFAULT_ADD_SECRET_RECORD_URL_STATEMENT = String.format("insert into %s ( %s ) values (?,?,?)", TABLE_NAME, FIELDS);
 
