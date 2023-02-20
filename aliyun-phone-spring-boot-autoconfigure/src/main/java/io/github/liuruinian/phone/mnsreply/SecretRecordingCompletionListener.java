@@ -41,7 +41,7 @@ public class SecretRecordingCompletionListener implements MessageListener, Appli
 
         // parameters reference: https://help.aliyun.com/document_detail/109203.html
         String pool_key = messageBody.getString("pool_key");
-        String sub_id = messageBody.getString("sub_id");
+        Long sub_id = messageBody.getLong("sub_id");
         String call_id = messageBody.getString("call_id");
         String call_time = messageBody.getString("call_time");
         if (log.isInfoEnabled()) {

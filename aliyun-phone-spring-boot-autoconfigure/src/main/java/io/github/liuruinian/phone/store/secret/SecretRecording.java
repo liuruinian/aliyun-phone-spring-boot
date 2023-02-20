@@ -21,7 +21,7 @@ public class SecretRecording implements Serializable {
 
     private String poolKey;
 
-    private String subId;
+    private Long subId;
 
     private String callId;
 
