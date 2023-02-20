@@ -8,6 +8,8 @@ import io.github.liuruinian.phone.domain.record.RingPublicUrlRequest;
 import io.github.liuruinian.phone.domain.record.SecretAsrDetailRequest;
 import io.github.liuruinian.phone.exception.PhoneRecordException;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
+import io.github.liuruinian.phone.store.record.RingPublicUrl;
+import io.github.liuruinian.phone.store.record.RingPublicUrlStore;
 import io.github.liuruinian.phone.store.record.SecretRecordUrl;
 import io.github.liuruinian.phone.store.record.SecretRecordUrlStore;
 import org.springframework.beans.BeansException;
@@ -15,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ResourceUtils;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -32,6 +35,8 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
 
     private SecretRecordUrlStore secretRecordUrlStore;
 
+    private RingPublicUrlStore ringPublicUrlStore;
+
     private OSSClient ossClient;
 
     public AbstractPhoneRecordProvider(IAcsClient acsClient, AliPhoneProperties properties) {
@@ -43,6 +48,7 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.ossClient = applicationContext.getBean(OSSClient.class);
         this.secretRecordUrlStore = applicationContext.getBean(SecretRecordUrlStore.class);
+        this.ringPublicUrlStore = applicationContext.getBean(RingPublicUrlStore.class);
     }
 
     @Override
@@ -58,13 +64,8 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
                 if (secretRecordUrlStore != null) {
                     List<SecretRecordUrl> recordUrls = secretRecordUrlStore.querySecretRecordUrl(callId);
                     if (CollectionUtils.isEmpty(recordUrls)) {
-                        URL url = ResourceUtils.getURL(downloadUrl);
-                        String file = url.getFile();
-                        String name = file.substring(1, file.indexOf("?"));
                         // upload ali oss
-                        InputStream inputStream = url.openStream();
-                        ossClient.putObject(prop.getOss().getBucketName(), name, inputStream);
-                        String ossUrl = "https://" + prop.getOss().getDomain() + "/" + name;
+                        String ossUrl = uploadAliOss(downloadUrl);
                         // secret_record_url
                         SecretRecordUrl secretRecordUrl = SecretRecordUrl.builder()
                                 .callId(request.getCallId())
@@ -94,6 +95,36 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
 
             GetTotalPublicUrlResponse response = acsClient.getAcsResponse(gpr);
             if (response.getCode() != null && "OK".equals(response.getCode())) {
+                GetTotalPublicUrlResponse.Data data = response.getData();
+                String phonePublicUrl = data.getPhonePublicUrl();
+                String ringPublicUrl = data.getRingPublicUrl();
+
+                String callId = request.getCallId();
+                if (ringPublicUrlStore != null) {
+                    List<RingPublicUrl> urls = ringPublicUrlStore.queryRingPublicUrl(callId);
+                    if (CollectionUtils.isEmpty(urls)) {
+                        String opp = uploadAliOss(phonePublicUrl);
+                        String orp = uploadAliOss(ringPublicUrl);
+                        RingPublicUrl url = RingPublicUrl.builder()
+                                .callId(request.getCallId())
+                                .callTime(request.getCallTime())
+                                .PhonePublicUrl(opp)
+                                .ringPublicUrl(orp)
+                                .build();
+                        ringPublicUrlStore.addRingPublicUrls(Collections.singleton(url));
+
+                        // reset data
+                        GetTotalPublicUrlResponse.Data d = new GetTotalPublicUrlResponse.Data();
+                        d.setRingPublicUrl(orp);
+                        d.setPhonePublicUrl(opp);
+                        response.setData(d);
+                    } else {
+                        GetTotalPublicUrlResponse.Data d = new GetTotalPublicUrlResponse.Data();
+                        d.setPhonePublicUrl(urls.get(0).getPhonePublicUrl());
+                        d.setRingPublicUrl(urls.get(0).getRingPublicUrl());
+                        response.setData(d);
+                    }
+                }
 
             }
 
@@ -101,6 +132,16 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
         } catch (Exception e) {
             throw new PhoneRecordException(e);
         }
+    }
+
+    private String uploadAliOss(String downloadUrl) throws IOException {
+        URL url = ResourceUtils.getURL(downloadUrl);
+        String file = url.getFile();
+        String name = file.substring(1, file.indexOf("?"));
+        // upload ali oss
+        InputStream inputStream = url.openStream();
+        ossClient.putObject(prop.getOss().getBucketName(), name, inputStream);
+        return "https://" + prop.getOss().getDomain() + "/" + name;
     }
 
     protected abstract GetTotalPublicUrlRequest buildGetTotalPublicUrlRequest(RingPublicUrlRequest request);

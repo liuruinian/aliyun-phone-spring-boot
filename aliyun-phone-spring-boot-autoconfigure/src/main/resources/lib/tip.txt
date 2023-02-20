@@ -1,0 +1,16 @@
+1.由于这两个jar包不在maven中央仓库，所以需要运行以下两条命令将其加入到maven本地仓库.
+    mvn install:install-file -Dfile=alicom-mns-receive-sdk-1.1.3.jar -DgroupId=com.alicom.mns -DartifactId=alicom-mns-receive-sdk -Dversion=1.1.3 -Dpackaging=jar
+    mvn install:install-file -Dfile=aliyun-java-sdk-dybaseapi-1.0.1.jar -DgroupId=com.aliyuncs.dybaseapi -DartifactId=aliyun-java-sdk-dybaseapi -Dversion=1.0.1 -Dpackaging=jar
+
+
+2.pom.xml加入依赖
+<dependency>
+    <groupId>com.alicom.mns</groupId>
+    <artifactId>alicom-mns-receive-sdk</artifactId>
+    <version>1.1.3</version>
+</dependency>
+<dependency>
+    <groupId>com.aliyuncs.dybaseapi</groupId>
+    <artifactId>aliyun-java-sdk-dybaseapi</artifactId>
+    <version>1.0.1</version>
+</dependency>
