@@ -57,6 +57,8 @@ public class AliPhoneConfiguration {
 
     /**
      * ali message puller, it should be prototype.
+     *
+     * @see ReplyMessageQueueInitializer#getDefaultAlicomMessagePuller()
      */
     @Bean
     @Scope(ConfigurableListableBeanFactory.SCOPE_PROTOTYPE)
