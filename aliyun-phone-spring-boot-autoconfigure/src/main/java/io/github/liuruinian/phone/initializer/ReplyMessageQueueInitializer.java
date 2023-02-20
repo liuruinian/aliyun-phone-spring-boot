@@ -2,6 +2,7 @@ package io.github.liuruinian.phone.initializer;
 
 import com.alicom.mns.tools.DefaultAlicomMessagePuller;
 import io.github.liuruinian.phone.constants.MessageType;
+import io.github.liuruinian.phone.mnsreply.SecretRecordingCompletionListener;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import io.github.liuruinian.phone.mnsreply.SecretEndReportListener;
 import io.github.liuruinian.phone.mnsreply.SecretStartReportListener;
@@ -27,12 +28,16 @@ public class ReplyMessageQueueInitializer implements ApplicationContextAware {
 
     private final SecretEndReportListener secretEndReportListener;
 
+    private final SecretRecordingCompletionListener secretRecordingListener;
+
     public ReplyMessageQueueInitializer(AliPhoneProperties properties,
                                         SecretStartReportListener secretStartReportListener,
-                                        SecretEndReportListener secretEndReportListener) {
+                                        SecretEndReportListener secretEndReportListener,
+                                        SecretRecordingCompletionListener secretRecordingListener) {
         this.properties = properties;
         this.secretStartReportListener = secretStartReportListener;
         this.secretEndReportListener = secretEndReportListener;
+        this.secretRecordingListener = secretRecordingListener;
     }
 
     public DefaultAlicomMessagePuller getDefaultAlicomMessagePuller() {
@@ -73,6 +78,19 @@ public class ReplyMessageQueueInitializer implements ApplicationContextAware {
             try {
                 log.info("[ReplyMessageQueueInitializer] - initializing the secret end report listener ......");
                 getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_END_REPORT, queueName, secretEndReportListener);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        // init secret recording listener
+        if (properties.getMns().getEnableRecordingCompletionEvent() &&
+                StringUtils.hasLength(properties.getMns().getSecretRecordingCompletionQueueName()) &&
+                messageType.contains(MessageType.SECRET_RECORDING_COMPLETION)) {
+            String queueName = properties.getMns().getSecretRecordingCompletionQueueName();
+            try {
+                log.info("[ReplyMessageQueueInitializer] - initializing the secret recording listener ......");
+                getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_RECORDING_COMPLETION, queueName, secretRecordingListener);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }

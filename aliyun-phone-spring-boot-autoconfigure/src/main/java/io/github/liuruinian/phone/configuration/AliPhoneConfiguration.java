@@ -97,10 +97,17 @@ public class AliPhoneConfiguration {
     }
 
     @Bean
+    public SecretRecordingCompletionListener secretRecordingListener() {
+        return new SecretRecordingCompletionListener();
+    }
+
+    @Bean
     public ReplyMessageQueueInitializer replyMessageQueueInitializer(AliPhoneProperties properties,
                                                                      SecretStartReportListener secretStartReportListener,
-                                                                     SecretEndReportListener secretEndReportListener) {
-        return new ReplyMessageQueueInitializer(properties, secretStartReportListener, secretEndReportListener);
+                                                                     SecretEndReportListener secretEndReportListener,
+                                                                     SecretRecordingCompletionListener secretRecordingListener) {
+        return new ReplyMessageQueueInitializer(properties, secretStartReportListener,
+                secretEndReportListener, secretRecordingListener);
     }
 
     // ~ ---------------------------------------- api delegate bean ----------------------------------------------------
