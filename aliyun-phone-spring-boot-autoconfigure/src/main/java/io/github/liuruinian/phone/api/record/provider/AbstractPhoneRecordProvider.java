@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ResourceUtils;
+import org.springframework.util.StringUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -103,8 +104,8 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
                 if (ringPublicUrlStore != null) {
                     List<RingPublicUrl> urls = ringPublicUrlStore.queryRingPublicUrl(callId);
                     if (CollectionUtils.isEmpty(urls)) {
-                        String opp = uploadAliOss(phonePublicUrl);
-                        String orp = uploadAliOss(ringPublicUrl);
+                        String opp = StringUtils.hasLength(phonePublicUrl) ? uploadAliOss(phonePublicUrl) : "";
+                        String orp = StringUtils.hasLength(ringPublicUrl) ? uploadAliOss(ringPublicUrl) : "";
                         RingPublicUrl url = RingPublicUrl.builder()
                                 .callId(request.getCallId())
                                 .callTime(request.getCallTime())
