@@ -8,12 +8,17 @@ import io.github.liuruinian.phone.domain.record.RingPublicUrlRequest;
 import io.github.liuruinian.phone.domain.record.SecretAsrDetailRequest;
 import io.github.liuruinian.phone.exception.PhoneRecordException;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
+import io.github.liuruinian.phone.store.record.SecretRecordUrl;
+import io.github.liuruinian.phone.store.record.SecretRecordUrlStore;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ResourceUtils;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author liuruinian
@@ -25,6 +30,8 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
 
     private final AliPhoneProperties prop;
 
+    private SecretRecordUrlStore secretRecordUrlStore;
+
     private OSSClient ossClient;
 
     public AbstractPhoneRecordProvider(IAcsClient acsClient, AliPhoneProperties properties) {
@@ -35,6 +42,7 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.ossClient = applicationContext.getBean(OSSClient.class);
+        this.secretRecordUrlStore = applicationContext.getBean(SecretRecordUrlStore.class);
     }
 
     @Override
@@ -45,14 +53,30 @@ public abstract class AbstractPhoneRecordProvider implements PhoneRecordProvider
             QueryRecordFileDownloadUrlResponse response = acsClient.getAcsResponse(qfr);
             if (response.getCode() != null && "OK".equals(response.getCode())) {
                 String downloadUrl = response.getDownloadUrl();
-                URL url = ResourceUtils.getURL(downloadUrl);
-                String file = url.getFile();
-                String name = file.substring(1, file.indexOf("?"));
-                // upload ali oss
-                InputStream inputStream = url.openStream();
-                ossClient.putObject(prop.getOss().getBucketName(), name, inputStream);
-                String ossUrl = "https://" + prop.getOss().getDomain() + "/" + name;
-                response.setDownloadUrl(ossUrl);
+
+                String callId = request.getCallId();
+                if (secretRecordUrlStore != null) {
+                    List<SecretRecordUrl> recordUrls = secretRecordUrlStore.querySecretRecordUrl(callId);
+                    if (CollectionUtils.isEmpty(recordUrls)) {
+                        URL url = ResourceUtils.getURL(downloadUrl);
+                        String file = url.getFile();
+                        String name = file.substring(1, file.indexOf("?"));
+                        // upload ali oss
+                        InputStream inputStream = url.openStream();
+                        ossClient.putObject(prop.getOss().getBucketName(), name, inputStream);
+                        String ossUrl = "https://" + prop.getOss().getDomain() + "/" + name;
+                        // secret_record_url
+                        SecretRecordUrl secretRecordUrl = SecretRecordUrl.builder()
+                                .callId(request.getCallId())
+                                .callTime(request.getCallTime())
+                                .downloadUrl(ossUrl).build();
+                        secretRecordUrlStore.addSecretRecordUrls(Collections.singleton(secretRecordUrl));
+
+                        response.setDownloadUrl(ossUrl);
+                    } else {
+                        response.setDownloadUrl(recordUrls.get(0).getDownloadUrl());
+                    }
+                }
             }
 
             return response;
