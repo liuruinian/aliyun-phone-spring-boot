@@ -100,5 +100,18 @@ public class ReplyMessageQueueInitializer implements ApplicationContextAware {
                 log.error(e.getMessage(), e);
             }
         }
+
+        // init secret exception phone report listener
+        if (properties.getMns().getEnableSecretExceptionPhoneReport() &&
+                StringUtils.hasLength(properties.getMns().getSecretExceptionPhoneReportQueueName()) &&
+                messageType.contains(MessageType.SECRET_EXCEPTION_PHONE_REPORT)) {
+            String queueName = properties.getMns().getSecretExceptionPhoneReportQueueName();
+            try {
+                log.info("[ReplyMessageQueueInitializer] - initializing the secret exception phone report listener ......");
+                getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_EXCEPTION_PHONE_REPORT, queueName, secretExceptionPhoneReportListener);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
     }
 }

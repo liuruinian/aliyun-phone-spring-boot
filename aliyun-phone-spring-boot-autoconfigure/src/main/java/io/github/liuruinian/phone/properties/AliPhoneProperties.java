@@ -118,34 +118,44 @@ public class AliPhoneProperties {
                 "SecretRecording,SecretAsrReport,SmartLogisticsReport,SecretRingReport,SecretPickUpReport,NumberManagementReport";
 
         /**
-         * Whether to enable the secret start report for call initiation
+         * Whether to enable the secret start report for call initiation.
          */
         private Boolean enableSecretStartReport = false;
 
         /**
-         * Name of the secret start report queue when the call is initiated
+         * Name of the secret start report queue when the call is initiated.
          */
         private String secretStartReportQueueName;
 
         /**
-         * Whether to enable the secret end report after call end
+         * Whether to enable the secret end report after call end.
          */
         private Boolean enableSecretEndReport = false;
 
         /**
-         * Name of the secret end report queue after the call ends
+         * Name of the secret end report queue after the call ends.
          */
         private String secretEndReportQueueName;
 
         /**
-         * Whether to enable recording completion event messages
+         * Whether to enable recording completion event messages.
          */
         private Boolean enableRecordingCompletionEvent = false;
 
         /**
-         * Recording completion event message queue name
+         * Recording completion event message queue name.
          */
         private String secretRecordingCompletionQueueName;
+
+        /**
+         * Whether to enable the secret exception phone report.
+         */
+        private Boolean enableSecretExceptionPhoneReport = false;
+
+        /**
+         * secret exception phone report queue name.
+         */
+        private String secretExceptionPhoneReportQueueName;
 
         public String getMessageType() {
             return messageType;
@@ -201,6 +211,22 @@ public class AliPhoneProperties {
 
         public void setSecretRecordingCompletionQueueName(String secretRecordingCompletionQueueName) {
             this.secretRecordingCompletionQueueName = secretRecordingCompletionQueueName;
+        }
+
+        public Boolean getEnableSecretExceptionPhoneReport() {
+            return enableSecretExceptionPhoneReport;
+        }
+
+        public void setEnableSecretExceptionPhoneReport(Boolean enableSecretExceptionPhoneReport) {
+            this.enableSecretExceptionPhoneReport = enableSecretExceptionPhoneReport;
+        }
+
+        public String getSecretExceptionPhoneReportQueueName() {
+            return secretExceptionPhoneReportQueueName;
+        }
+
+        public void setSecretExceptionPhoneReportQueueName(String secretExceptionPhoneReportQueueName) {
+            this.secretExceptionPhoneReportQueueName = secretExceptionPhoneReportQueueName;
         }
     }
 
