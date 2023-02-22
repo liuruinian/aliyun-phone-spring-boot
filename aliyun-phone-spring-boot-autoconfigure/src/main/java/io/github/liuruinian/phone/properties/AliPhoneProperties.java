@@ -157,6 +157,16 @@ public class AliPhoneProperties {
          */
         private String secretExceptionPhoneReportQueueName;
 
+        /**
+         * Whether to enable the secret asr report.
+         */
+        private Boolean enableSecretAsrReport = false;
+
+        /**
+         * secret asr report queue name.
+         */
+        private String secretAsrReportQueueName;
+
         public String getMessageType() {
             return messageType;
         }
@@ -227,6 +237,22 @@ public class AliPhoneProperties {
 
         public void setSecretExceptionPhoneReportQueueName(String secretExceptionPhoneReportQueueName) {
             this.secretExceptionPhoneReportQueueName = secretExceptionPhoneReportQueueName;
+        }
+
+        public Boolean getEnableSecretAsrReport() {
+            return enableSecretAsrReport;
+        }
+
+        public void setEnableSecretAsrReport(Boolean enableSecretAsrReport) {
+            this.enableSecretAsrReport = enableSecretAsrReport;
+        }
+
+        public String getSecretAsrReportQueueName() {
+            return secretAsrReportQueueName;
+        }
+
+        public void setSecretAsrReportQueueName(String secretAsrReportQueueName) {
+            this.secretAsrReportQueueName = secretAsrReportQueueName;
         }
     }
 

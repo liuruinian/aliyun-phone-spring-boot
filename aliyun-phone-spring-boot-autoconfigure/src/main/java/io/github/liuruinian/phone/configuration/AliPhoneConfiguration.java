@@ -13,10 +13,7 @@ import io.github.liuruinian.phone.api.record.delegate.PhoneRecordDelegate;
 import io.github.liuruinian.phone.api.state.delegate.StateQueryDelegate;
 import io.github.liuruinian.phone.api.subscribe.delegate.SubscriptionOperationDelegate;
 import io.github.liuruinian.phone.initializer.ReplyMessageQueueInitializer;
-import io.github.liuruinian.phone.mnsreply.SecretEndReportListener;
-import io.github.liuruinian.phone.mnsreply.SecretExceptionPhoneReportListener;
-import io.github.liuruinian.phone.mnsreply.SecretRecordingCompletionListener;
-import io.github.liuruinian.phone.mnsreply.SecretStartReportListener;
+import io.github.liuruinian.phone.mnsreply.*;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -110,13 +107,19 @@ public class AliPhoneConfiguration {
     }
 
     @Bean
+    public SecretAsrReportListener secretAsrReportListener() {
+        return new SecretAsrReportListener();
+    }
+
+    @Bean
     public ReplyMessageQueueInitializer replyMessageQueueInitializer(AliPhoneProperties properties,
                                                                      SecretStartReportListener secretStartReportListener,
                                                                      SecretEndReportListener secretEndReportListener,
                                                                      SecretRecordingCompletionListener secretRecordingListener,
-                                                                     SecretExceptionPhoneReportListener secretExceptionPhoneReportListener) {
+                                                                     SecretExceptionPhoneReportListener secretExceptionPhoneReportListener,
+                                                                     SecretAsrReportListener secretAsrReportListener) {
         return new ReplyMessageQueueInitializer(properties, secretStartReportListener,
-                secretEndReportListener, secretRecordingListener, secretExceptionPhoneReportListener);
+                secretEndReportListener, secretRecordingListener, secretExceptionPhoneReportListener, secretAsrReportListener);
     }
 
     // ~ ---------------------------------------- api delegate bean ----------------------------------------------------

@@ -2,11 +2,8 @@ package io.github.liuruinian.phone.initializer;
 
 import com.alicom.mns.tools.DefaultAlicomMessagePuller;
 import io.github.liuruinian.phone.constants.MessageType;
-import io.github.liuruinian.phone.mnsreply.SecretExceptionPhoneReportListener;
-import io.github.liuruinian.phone.mnsreply.SecretRecordingCompletionListener;
+import io.github.liuruinian.phone.mnsreply.*;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
-import io.github.liuruinian.phone.mnsreply.SecretEndReportListener;
-import io.github.liuruinian.phone.mnsreply.SecretStartReportListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -33,16 +30,20 @@ public class ReplyMessageQueueInitializer implements ApplicationContextAware {
 
     private final SecretExceptionPhoneReportListener secretExceptionPhoneReportListener;
 
+    private final SecretAsrReportListener secretAsrReportListener;
+
     public ReplyMessageQueueInitializer(AliPhoneProperties properties,
                                         SecretStartReportListener secretStartReportListener,
                                         SecretEndReportListener secretEndReportListener,
                                         SecretRecordingCompletionListener secretRecordingListener,
-                                        SecretExceptionPhoneReportListener secretExceptionPhoneReportListener) {
+                                        SecretExceptionPhoneReportListener secretExceptionPhoneReportListener,
+                                        SecretAsrReportListener secretAsrReportListener) {
         this.properties = properties;
         this.secretStartReportListener = secretStartReportListener;
         this.secretEndReportListener = secretEndReportListener;
         this.secretRecordingListener = secretRecordingListener;
         this.secretExceptionPhoneReportListener = secretExceptionPhoneReportListener;
+        this.secretAsrReportListener = secretAsrReportListener;
     }
 
     public DefaultAlicomMessagePuller getDefaultAlicomMessagePuller() {
@@ -109,6 +110,19 @@ public class ReplyMessageQueueInitializer implements ApplicationContextAware {
             try {
                 log.info("[ReplyMessageQueueInitializer] - initializing the secret exception phone report listener ......");
                 getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_EXCEPTION_PHONE_REPORT, queueName, secretExceptionPhoneReportListener);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        // init secret asr report listener
+        if (properties.getMns().getEnableSecretAsrReport() &&
+                StringUtils.hasLength(properties.getMns().getSecretAsrReportQueueName()) &&
+                messageType.contains(MessageType.SECRET_ASR_REPORT)) {
+            String queueName = properties.getMns().getSecretAsrReportQueueName();
+            try {
+                log.info("[ReplyMessageQueueInitializer] - initializing the secret asr report listener ......");
+                getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_ASR_REPORT, queueName, secretAsrReportListener);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }
