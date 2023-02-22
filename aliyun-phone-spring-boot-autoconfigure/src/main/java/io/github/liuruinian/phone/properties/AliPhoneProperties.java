@@ -111,9 +111,11 @@ public class AliPhoneProperties {
         /**
          * message type, separate with ','
          * <p>
-         * default: SecretStartReport、SecretReport、SecretSmsIntercept、SecretRecording
+         * default: SecretStartReport,SecretReport,SecretExceptionPhoneReport,SecretRecording,
+         * SecretAsrReport,SmartLogisticsReport,SecretRingReport,SecretPickUpReport,NumberManagementReport
          */
-        private String messageType = "SecretStartReport,SecretReport,SecretSmsIntercept,SecretRecording";
+        private String messageType = "SecretStartReport,SecretReport,SecretExceptionPhoneReport," +
+                "SecretRecording,SecretAsrReport,SmartLogisticsReport,SecretRingReport,SecretPickUpReport,NumberManagementReport";
 
         /**
          * Whether to enable the secret start report for call initiation

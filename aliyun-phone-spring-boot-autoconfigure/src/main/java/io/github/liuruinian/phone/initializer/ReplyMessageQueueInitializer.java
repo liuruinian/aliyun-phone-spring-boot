@@ -2,6 +2,7 @@ package io.github.liuruinian.phone.initializer;
 
 import com.alicom.mns.tools.DefaultAlicomMessagePuller;
 import io.github.liuruinian.phone.constants.MessageType;
+import io.github.liuruinian.phone.mnsreply.SecretExceptionPhoneReportListener;
 import io.github.liuruinian.phone.mnsreply.SecretRecordingCompletionListener;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
 import io.github.liuruinian.phone.mnsreply.SecretEndReportListener;
@@ -30,14 +31,18 @@ public class ReplyMessageQueueInitializer implements ApplicationContextAware {
 
     private final SecretRecordingCompletionListener secretRecordingListener;
 
+    private final SecretExceptionPhoneReportListener secretExceptionPhoneReportListener;
+
     public ReplyMessageQueueInitializer(AliPhoneProperties properties,
                                         SecretStartReportListener secretStartReportListener,
                                         SecretEndReportListener secretEndReportListener,
-                                        SecretRecordingCompletionListener secretRecordingListener) {
+                                        SecretRecordingCompletionListener secretRecordingListener,
+                                        SecretExceptionPhoneReportListener secretExceptionPhoneReportListener) {
         this.properties = properties;
         this.secretStartReportListener = secretStartReportListener;
         this.secretEndReportListener = secretEndReportListener;
         this.secretRecordingListener = secretRecordingListener;
+        this.secretExceptionPhoneReportListener = secretExceptionPhoneReportListener;
     }
 
     public DefaultAlicomMessagePuller getDefaultAlicomMessagePuller() {

@@ -70,9 +70,9 @@
     {
       "name": "phone.protection.ali.mns.message-type",
       "type": "java.lang.String",
-      "description": "message type, separate with ',' <p> default: SecretStartReport、SecretReport、SecretSmsIntercept、SecretRecording.",
+      "description": "message type, separate with ',' <p> default: SecretStartReport,SecretReport,SecretExceptionPhoneReport,SecretRecording,SecretAsrReport,SmartLogisticsReport,SecretRingReport,SecretPickUpReport,NumberManagementReport.",
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
-      "defaultValue": "SecretStartReport,SecretReport,SecretSmsIntercept,SecretRecording"
+      "defaultValue": "SecretStartReport,SecretReport,SecretExceptionPhoneReport,SecretRecording,SecretAsrReport,SmartLogisticsReport,SecretRingReport,SecretPickUpReport,NumberManagementReport"
     },
     {
       "name": "phone.protection.ali.mns.secret-end-report-queue-name",

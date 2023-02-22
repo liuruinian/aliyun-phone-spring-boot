@@ -1,10 +1,9 @@
-package io.github.liuruinian.phone.store.secret;
+package io.github.liuruinian.phone.store.report;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 
 /**
@@ -15,9 +14,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SecretRecording implements Serializable {
-
-    private Long id;
+public class SecretStartReport implements Serializable {
 
     private String poolKey;
 
@@ -25,5 +22,19 @@ public class SecretRecording implements Serializable {
 
     private String callId;
 
+    private String phoneNo;
+
+    private String secretNo;
+
+    private String peerNo;
+
+    private String calledDisplayNo;
+
+    private Integer callType;
+
     private String callTime;
+
+    private String outId;
+
+    private String controlMsg;
 }

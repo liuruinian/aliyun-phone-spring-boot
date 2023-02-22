@@ -1,4 +1,4 @@
-package io.github.liuruinian.phone.store.secret;
+package io.github.liuruinian.phone.store.report;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

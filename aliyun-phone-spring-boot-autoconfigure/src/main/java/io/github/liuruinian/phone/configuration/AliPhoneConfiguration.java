@@ -14,6 +14,7 @@ import io.github.liuruinian.phone.api.state.delegate.StateQueryDelegate;
 import io.github.liuruinian.phone.api.subscribe.delegate.SubscriptionOperationDelegate;
 import io.github.liuruinian.phone.initializer.ReplyMessageQueueInitializer;
 import io.github.liuruinian.phone.mnsreply.SecretEndReportListener;
+import io.github.liuruinian.phone.mnsreply.SecretExceptionPhoneReportListener;
 import io.github.liuruinian.phone.mnsreply.SecretRecordingCompletionListener;
 import io.github.liuruinian.phone.mnsreply.SecretStartReportListener;
 import io.github.liuruinian.phone.properties.AliPhoneProperties;
@@ -104,12 +105,18 @@ public class AliPhoneConfiguration {
     }
 
     @Bean
+    public SecretExceptionPhoneReportListener secretExceptionPhoneReportListener() {
+        return new SecretExceptionPhoneReportListener();
+    }
+
+    @Bean
     public ReplyMessageQueueInitializer replyMessageQueueInitializer(AliPhoneProperties properties,
                                                                      SecretStartReportListener secretStartReportListener,
                                                                      SecretEndReportListener secretEndReportListener,
-                                                                     SecretRecordingCompletionListener secretRecordingListener) {
+                                                                     SecretRecordingCompletionListener secretRecordingListener,
+                                                                     SecretExceptionPhoneReportListener secretExceptionPhoneReportListener) {
         return new ReplyMessageQueueInitializer(properties, secretStartReportListener,
-                secretEndReportListener, secretRecordingListener);
+                secretEndReportListener, secretRecordingListener, secretExceptionPhoneReportListener);
     }
 
     // ~ ---------------------------------------- api delegate bean ----------------------------------------------------
