@@ -8,5 +8,5 @@ import java.util.Collection;
  */
 public interface SecretRecordingStore {
 
-    boolean addSecretEndReports(Collection<SecretRecording> recordings);
+    boolean addSecretRecordings(Collection<SecretRecording> recordings);
 }

@@ -167,6 +167,46 @@ public class AliPhoneProperties {
          */
         private String secretAsrReportQueueName;
 
+        /**
+         * Whether to enable the smart logistic report.
+         */
+        private Boolean enableSmartLogisticsReport = false;
+
+        /**
+         * smart logistic report queue name.
+         */
+        private String smartLogisticsReportQueueName;
+
+        /**
+         * Whether to enable the secret ring report.
+         */
+        private Boolean enableSecretRingReport = false;
+
+        /**
+         * secret ring report queue name.
+         */
+        private String secretRingReportQueueName;
+
+        /**
+         * Whether to enable the secret pick up report.
+         */
+        private Boolean enableSecretPickUpReport = false;
+
+        /**
+         * secret pick up report queue name.
+         */
+        private String secretPickUpReportQueueName;
+
+        /**
+         * Whether to enable the number management report.
+         */
+        private Boolean enableNumberManagementReport = false;
+
+        /**
+         * number management report queue name.
+         */
+        private String numberManagementReportQueueName;
+
         public String getMessageType() {
             return messageType;
         }
@@ -253,6 +293,70 @@ public class AliPhoneProperties {
 
         public void setSecretAsrReportQueueName(String secretAsrReportQueueName) {
             this.secretAsrReportQueueName = secretAsrReportQueueName;
+        }
+
+        public Boolean getEnableSmartLogisticsReport() {
+            return enableSmartLogisticsReport;
+        }
+
+        public void setEnableSmartLogisticsReport(Boolean enableSmartLogisticsReport) {
+            this.enableSmartLogisticsReport = enableSmartLogisticsReport;
+        }
+
+        public String getSmartLogisticsReportQueueName() {
+            return smartLogisticsReportQueueName;
+        }
+
+        public void setSmartLogisticsReportQueueName(String smartLogisticsReportQueueName) {
+            this.smartLogisticsReportQueueName = smartLogisticsReportQueueName;
+        }
+
+        public Boolean getEnableSecretRingReport() {
+            return enableSecretRingReport;
+        }
+
+        public void setEnableSecretRingReport(Boolean enableSecretRingReport) {
+            this.enableSecretRingReport = enableSecretRingReport;
+        }
+
+        public String getSecretRingReportQueueName() {
+            return secretRingReportQueueName;
+        }
+
+        public void setSecretRingReportQueueName(String secretRingReportQueueName) {
+            this.secretRingReportQueueName = secretRingReportQueueName;
+        }
+
+        public Boolean getEnableSecretPickUpReport() {
+            return enableSecretPickUpReport;
+        }
+
+        public void setEnableSecretPickUpReport(Boolean enableSecretPickUpReport) {
+            this.enableSecretPickUpReport = enableSecretPickUpReport;
+        }
+
+        public String getSecretPickUpReportQueueName() {
+            return secretPickUpReportQueueName;
+        }
+
+        public void setSecretPickUpReportQueueName(String secretPickUpReportQueueName) {
+            this.secretPickUpReportQueueName = secretPickUpReportQueueName;
+        }
+
+        public Boolean getEnableNumberManagementReport() {
+            return enableNumberManagementReport;
+        }
+
+        public void setEnableNumberManagementReport(Boolean enableNumberManagementReport) {
+            this.enableNumberManagementReport = enableNumberManagementReport;
+        }
+
+        public String getNumberManagementReportQueueName() {
+            return numberManagementReportQueueName;
+        }
+
+        public void setNumberManagementReportQueueName(String numberManagementReportQueueName) {
+            this.numberManagementReportQueueName = numberManagementReportQueueName;
         }
     }
 

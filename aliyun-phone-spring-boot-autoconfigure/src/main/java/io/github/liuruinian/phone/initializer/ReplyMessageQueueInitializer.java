@@ -32,18 +32,34 @@ public class ReplyMessageQueueInitializer implements ApplicationContextAware {
 
     private final SecretAsrReportListener secretAsrReportListener;
 
+    private final SmartLogisticsReportListener smartLogisticsReportListener;
+
+    private final SecretRingReportListener secretRingReportListener;
+
+    private final SecretPickUpReportListener secretPickUpReportListener;
+
+    private final NumberManagementReportListener numberManagementReportListener;
+
     public ReplyMessageQueueInitializer(AliPhoneProperties properties,
                                         SecretStartReportListener secretStartReportListener,
                                         SecretEndReportListener secretEndReportListener,
                                         SecretRecordingCompletionListener secretRecordingListener,
                                         SecretExceptionPhoneReportListener secretExceptionPhoneReportListener,
-                                        SecretAsrReportListener secretAsrReportListener) {
+                                        SecretAsrReportListener secretAsrReportListener,
+                                        SmartLogisticsReportListener smartLogisticsReportListener,
+                                        SecretRingReportListener secretRingReportListener,
+                                        SecretPickUpReportListener secretPickUpReportListener,
+                                        NumberManagementReportListener numberManagementReportListener) {
         this.properties = properties;
         this.secretStartReportListener = secretStartReportListener;
         this.secretEndReportListener = secretEndReportListener;
         this.secretRecordingListener = secretRecordingListener;
         this.secretExceptionPhoneReportListener = secretExceptionPhoneReportListener;
         this.secretAsrReportListener = secretAsrReportListener;
+        this.smartLogisticsReportListener = smartLogisticsReportListener;
+        this.secretRingReportListener = secretRingReportListener;
+        this.secretPickUpReportListener = secretPickUpReportListener;
+        this.numberManagementReportListener = numberManagementReportListener;
     }
 
     public DefaultAlicomMessagePuller getDefaultAlicomMessagePuller() {
@@ -123,6 +139,58 @@ public class ReplyMessageQueueInitializer implements ApplicationContextAware {
             try {
                 log.info("[ReplyMessageQueueInitializer] - initializing the secret asr report listener ......");
                 getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_ASR_REPORT, queueName, secretAsrReportListener);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        // init smart logistics report listener
+        if (properties.getMns().getEnableSmartLogisticsReport() &&
+                StringUtils.hasLength(properties.getMns().getSmartLogisticsReportQueueName()) &&
+                messageType.contains(MessageType.SMART_LOGISTICS_REPORT)) {
+            String queueName = properties.getMns().getSmartLogisticsReportQueueName();
+            try {
+                log.info("[ReplyMessageQueueInitializer] - initializing the smart logistics report listener ......");
+                getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SMART_LOGISTICS_REPORT, queueName, smartLogisticsReportListener);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        // init secret ring report listener
+        if (properties.getMns().getEnableSecretRingReport() &&
+                StringUtils.hasLength(properties.getMns().getSecretRingReportQueueName()) &&
+                messageType.contains(MessageType.SECRET_RING_REPORT)) {
+            String queueName = properties.getMns().getSecretRingReportQueueName();
+            try {
+                log.info("[ReplyMessageQueueInitializer] - initializing the secret ring report listener ......");
+                getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_RING_REPORT, queueName, secretRingReportListener);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        // init secret pick up report listener
+        if (properties.getMns().getEnableSecretPickUpReport() &&
+                StringUtils.hasLength(properties.getMns().getSecretPickUpReportQueueName()) &&
+                messageType.contains(MessageType.SECRET_PICKUP_REPORT)) {
+            String queueName = properties.getMns().getSecretPickUpReportQueueName();
+            try {
+                log.info("[ReplyMessageQueueInitializer] - initializing the secret pick up report listener ......");
+                getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.SECRET_PICKUP_REPORT, queueName, secretPickUpReportListener);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        // init number management report listener
+        if (properties.getMns().getEnableNumberManagementReport() &&
+                StringUtils.hasLength(properties.getMns().getNumberManagementReportQueueName()) &&
+                messageType.contains(MessageType.NUMBER_MANAGEMENT_REPORT)) {
+            String queueName = properties.getMns().getNumberManagementReportQueueName();
+            try {
+                log.info("[ReplyMessageQueueInitializer] - initializing the number management report listener ......");
+                getDefaultAlicomMessagePuller().startReceiveMsg(accessKeyId, accessKeySecret, MessageType.NUMBER_MANAGEMENT_REPORT, queueName, numberManagementReportListener);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }

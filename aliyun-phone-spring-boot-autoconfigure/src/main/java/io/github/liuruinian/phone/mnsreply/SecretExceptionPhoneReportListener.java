@@ -62,7 +62,7 @@ public class SecretExceptionPhoneReportListener implements MessageListener, Appl
 
         try {
             SecretExceptionPhoneReportStore store = context.getBean(SecretExceptionPhoneReportStore.class);
-            boolean added = store.addSecretEndReports(Collections.singleton(exceptionPhoneReport));
+            boolean added = store.addSecretExceptionPhoneReports(Collections.singleton(exceptionPhoneReport));
             if (added) {
                 if (log.isInfoEnabled()) {
                     log.info("a secret exception phone report added, secret_no: {}, timestamp: {}.", exceptionPhoneReport.getSecretNo(), exceptionPhoneReport.getTimestamp());

@@ -112,14 +112,39 @@ public class AliPhoneConfiguration {
     }
 
     @Bean
+    public SmartLogisticsReportListener smartLogisticsReportListener() {
+        return new SmartLogisticsReportListener();
+    }
+
+    @Bean
+    public SecretRingReportListener secretRingReportListener() {
+        return new SecretRingReportListener();
+    }
+
+    @Bean
+    public SecretPickUpReportListener secretPickUpReportListener() {
+        return new SecretPickUpReportListener();
+    }
+
+    @Bean
+    public NumberManagementReportListener numberManagementReportListener() {
+        return new NumberManagementReportListener();
+    }
+
+    @Bean
     public ReplyMessageQueueInitializer replyMessageQueueInitializer(AliPhoneProperties properties,
                                                                      SecretStartReportListener secretStartReportListener,
                                                                      SecretEndReportListener secretEndReportListener,
                                                                      SecretRecordingCompletionListener secretRecordingListener,
                                                                      SecretExceptionPhoneReportListener secretExceptionPhoneReportListener,
-                                                                     SecretAsrReportListener secretAsrReportListener) {
-        return new ReplyMessageQueueInitializer(properties, secretStartReportListener,
-                secretEndReportListener, secretRecordingListener, secretExceptionPhoneReportListener, secretAsrReportListener);
+                                                                     SecretAsrReportListener secretAsrReportListener,
+                                                                     SmartLogisticsReportListener smartLogisticsReportListener,
+                                                                     SecretRingReportListener secretRingReportListener,
+                                                                     SecretPickUpReportListener secretPickUpReportListener,
+                                                                     NumberManagementReportListener numberManagementReportListener) {
+        return new ReplyMessageQueueInitializer(properties, secretStartReportListener, secretEndReportListener, secretRecordingListener,
+                secretExceptionPhoneReportListener, secretAsrReportListener, smartLogisticsReportListener,
+                secretRingReportListener, secretPickUpReportListener, numberManagementReportListener);
     }
 
     // ~ ---------------------------------------- api delegate bean ----------------------------------------------------

@@ -8,5 +8,5 @@ import java.util.Collection;
  */
 public interface SecretAsrReportStore {
 
-    boolean addSecretEndReports(Collection<SecretAsrReport> reports);
+    boolean addSecretAsrReports(Collection<SecretAsrReport> reports);
 }

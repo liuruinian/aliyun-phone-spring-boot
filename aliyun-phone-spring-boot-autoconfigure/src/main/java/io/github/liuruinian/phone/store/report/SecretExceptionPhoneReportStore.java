@@ -8,5 +8,5 @@ import java.util.Collection;
  */
 public interface SecretExceptionPhoneReportStore {
 
-    boolean addSecretEndReports(Collection<SecretExceptionPhoneReport> reports);
+    boolean addSecretExceptionPhoneReports(Collection<SecretExceptionPhoneReport> reports);
 }

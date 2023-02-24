@@ -47,9 +47,23 @@
       "defaultValue": "cn-hangzhou"
     },
     {
+      "name": "phone.protection.ali.mns.enable-number-management-report",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the number management report.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
+      "defaultValue": false
+    },
+    {
       "name": "phone.protection.ali.mns.enable-recording-completion-event",
       "type": "java.lang.Boolean",
       "description": "Whether to enable recording completion event messages.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
+      "defaultValue": false
+    },
+    {
+      "name": "phone.protection.ali.mns.enable-secret-asr-report",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the secret asr report.",
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
       "defaultValue": false
     },
@@ -61,9 +75,37 @@
       "defaultValue": false
     },
     {
+      "name": "phone.protection.ali.mns.enable-secret-exception-phone-report",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the secret exception phone report.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
+      "defaultValue": false
+    },
+    {
+      "name": "phone.protection.ali.mns.enable-secret-pick-up-report",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the secret pick up report.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
+      "defaultValue": false
+    },
+    {
+      "name": "phone.protection.ali.mns.enable-secret-ring-report",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the secret ring report.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
+      "defaultValue": false
+    },
+    {
       "name": "phone.protection.ali.mns.enable-secret-start-report",
       "type": "java.lang.Boolean",
       "description": "Whether to enable the secret start report for call initiation.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
+      "defaultValue": false
+    },
+    {
+      "name": "phone.protection.ali.mns.enable-smart-logistics-report",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the smart logistic report.",
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns",
       "defaultValue": false
     },
@@ -75,9 +117,33 @@
       "defaultValue": "SecretStartReport,SecretReport,SecretExceptionPhoneReport,SecretRecording,SecretAsrReport,SmartLogisticsReport,SecretRingReport,SecretPickUpReport,NumberManagementReport"
     },
     {
+      "name": "phone.protection.ali.mns.number-management-report-queue-name",
+      "type": "java.lang.String",
+      "description": "number management report queue name.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
+    },
+    {
+      "name": "phone.protection.ali.mns.secret-asr-report-queue-name",
+      "type": "java.lang.String",
+      "description": "secret asr report queue name.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
+    },
+    {
       "name": "phone.protection.ali.mns.secret-end-report-queue-name",
       "type": "java.lang.String",
       "description": "Name of the secret end report queue after the call ends.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
+    },
+    {
+      "name": "phone.protection.ali.mns.secret-exception-phone-report-queue-name",
+      "type": "java.lang.String",
+      "description": "secret exception phone report queue name.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
+    },
+    {
+      "name": "phone.protection.ali.mns.secret-pick-up-report-queue-name",
+      "type": "java.lang.String",
+      "description": "secret pick up report queue name.",
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
     },
     {
@@ -87,9 +153,21 @@
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
     },
     {
+      "name": "phone.protection.ali.mns.secret-ring-report-queue-name",
+      "type": "java.lang.String",
+      "description": "secret ring report queue name.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
+    },
+    {
       "name": "phone.protection.ali.mns.secret-start-report-queue-name",
       "type": "java.lang.String",
       "description": "Name of the secret start report queue when the call is initiated.",
+      "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
+    },
+    {
+      "name": "phone.protection.ali.mns.smart-logistics-report-queue-name",
+      "type": "java.lang.String",
+      "description": "smart logistic report queue name.",
       "sourceType": "io.github.liuruinian.phone.properties.AliPhoneProperties$Mns"
     },
     {

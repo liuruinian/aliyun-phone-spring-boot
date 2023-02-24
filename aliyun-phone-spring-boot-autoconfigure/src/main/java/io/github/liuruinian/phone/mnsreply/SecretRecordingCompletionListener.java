@@ -61,7 +61,7 @@ public class SecretRecordingCompletionListener implements MessageListener, Appli
 
         try {
             SecretRecordingStore recordingStore = context.getBean(SecretRecordingStore.class);
-            boolean added = recordingStore.addSecretEndReports(Collections.singleton(secretRecording));
+            boolean added = recordingStore.addSecretRecordings(Collections.singleton(secretRecording));
             if (added) {
                 if (log.isInfoEnabled()) {
                     log.info("a secret recording added, call_id: {}, call_time: {}.", secretRecording.getCallId(), secretRecording.getCallTime());
