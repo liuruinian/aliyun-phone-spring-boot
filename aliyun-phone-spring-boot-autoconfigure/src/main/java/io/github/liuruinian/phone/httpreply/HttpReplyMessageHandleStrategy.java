@@ -11,14 +11,14 @@ import java.lang.reflect.Constructor;
  */
 public class HttpReplyMessageHandleStrategy {
     // ~ static fields
-    public static final String MODE_SECRET_START_REPORT = "MODE_SECRET_START_REPORT";
-    public static final String MODE_SECRET_ASR_REPORT = "MODE_SECRET_ASR_REPORT";
-    public static final String MODE_SECRET_RECORDING = "MODE_SECRET_RECORDING";
-    public static final String MODE_SECRET_END_REPORT = "MODE_SECRET_END_REPORT";
-    public static final String MODE_SMART_LOGISTICS_REPORT = "MODE_SMART_LOGISTICS_REPORT";
-    public static final String MODE_SECRET_RING_REPORT = "MODE_SECRET_RING_REPORT";
-    public static final String MODE_SECRET_PICKUP_REPORT = "MODE_SECRET_PICKUP_REPORT";
-    public static final String MODE_NUMBER_MANAGEMENT_REPORT = "MODE_NUMBER_MANAGEMENT_REPORT";
+    public static final String MODE_SECRET_START_REPORT = "mode_secret_start_report";
+    public static final String MODE_SECRET_ASR_REPORT = "mode_secret_asr_report";
+    public static final String MODE_SECRET_RECORDING = "mode_secret_recording";
+    public static final String MODE_SECRET_END_REPORT = "mode_secret_end_report";
+    public static final String MODE_SMART_LOGISTICS_REPORT = "mode_smart_logistics_report";
+    public static final String MODE_SECRET_RING_REPORT = "mode_secret_ring_report";
+    public static final String MODE_SECRET_PICKUP_REPORT = "mode_secret_pickup_report";
+    public static final String MODE_NUMBER_MANAGEMENT_REPORT = "mode_number_management_report";
     public static final String SYSTEM_PROPERTY = "aliphone.protection.strategy";
 
     private static HttpReplyMessageHandler strategy;
